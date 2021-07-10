@@ -1,0 +1,1323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>CameraSettingsWidget</class>
+ <widget class="QWidget" name="CameraSettingsWidget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>550</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>550</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>550</width>
+    <height>300</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>CameraSettingsWidget</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_2">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="1" column="0">
+    <widget class="QWidget" name="ButtonsWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>341</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: transparent;
+border: none;</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_6">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="spacing">
+       <number>5</number>
+      </property>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QWidget" name="MainWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>550</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>550</width>
+       <height>300</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">background-color: rgb(50,50,50);
+border: 1px solid rgb(100,100,100);
+border-radius: 5px;</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="topMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
+      <property name="spacing">
+       <number>10</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="ClientIPLabel">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color: white;
+border: none;</string>
+        </property>
+        <property name="text">
+         <string>IP клиента</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QPushButton" name="RefreshClientIPsButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="toolTip">
+         <string>Обновить</string>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	color: white;
+	background-color:rgb(60,60,60);
+	border: 1px solid rgb(100,100,100);
+	border-radius:5px;
+	icon: url(Icons/ReloadIcon.png);
+}
+
+QPushButton:hover:!pressed {
+    background-color: rgb(70,70,70);
+}
+
+QToolTip
+{
+	color: white;
+	background-color: rgb(30,140,200);
+	border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="CameraNameLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(255,255,255);
+border: none;
+background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Имя камеры</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QPushButton" name="RefreshCameraNamesButton">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <stylestrategy>PreferDefault</stylestrategy>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
+        <property name="toolTip">
+         <string>Обновить</string>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+	color: white;
+	background-color:rgb(60,60,60);
+	border: 1px solid rgb(100,100,100);
+	border-radius:5px;
+	icon: url(Icons/ReloadIcon.png);
+}
+
+QPushButton:hover:!pressed {
+    background-color: rgb(70,70,70);
+}
+
+QToolTip
+{
+	color: white;
+	background-color: rgb(30,140,200);
+	border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="autoDefault">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="BrighnessLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(255,255,255);
+border: none;
+background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Яркость</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSlider" name="BrightnessSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider {
+	background: transparent;
+	border: none;
+}
+
+QSlider::groove:horizontal {
+    border: 1px solid rgb(100,100,100);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(55,55,55);
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: rgb(30,140,200);
+    border: 1px solid rgb(38,179,255);
+	border-radius: 5px;
+    width: 18px;
+    margin: -6px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+}
+
+QSlider::sub-page:horizontal {
+    border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(30,140,200);
+	margin: 2px 0;
+}</string>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="sliderPosition">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::NoTicks</enum>
+        </property>
+        <property name="tickInterval">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QLineEdit" name="BrightnessEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	font: 10pt &quot;Arial&quot;;
+	color: white;
+	background: rgb(55,55,55);
+	selection-background-color: rgb(30,140,200);
+    border: 1px solid rgb(100,100,100);
+    border-radius: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>50</string>
+        </property>
+        <property name="maxLength">
+         <number>3</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="ContrastLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(255,255,255);
+border: none;
+background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Контрастность</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSlider" name="ContrastSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider {
+	background: transparent;
+	border: none;
+}
+
+QSlider::groove:horizontal {
+    border: 1px solid rgb(100,100,100);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(55,55,55);
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: rgb(30,140,200);
+    border: 1px solid rgb(38,179,255);
+	border-radius: 5px;
+    width: 18px;
+    margin: -6px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+}
+
+QSlider::sub-page:horizontal {
+    border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(30,140,200);
+	margin: 2px 0;
+}</string>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="sliderPosition">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::NoTicks</enum>
+        </property>
+        <property name="tickInterval">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QLineEdit" name="ContrastEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	font: 10pt &quot;Arial&quot;;
+	color: white;
+	background: rgb(55,55,55);
+	selection-background-color: rgb(30,140,200);
+    border: 1px solid rgb(100,100,100);
+    border-radius: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>50</string>
+        </property>
+        <property name="maxLength">
+         <number>3</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="HueLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(255,255,255);
+border: none;
+background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Оттенок</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSlider" name="HueSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider {
+	background: transparent;
+	border: none;
+}
+
+QSlider::groove:horizontal {
+    border: 1px solid rgb(100,100,100);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(55,55,55);
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: rgb(30,140,200);
+    border: 1px solid rgb(38,179,255);
+	border-radius: 5px;
+    width: 18px;
+    margin: -6px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+}
+
+QSlider::sub-page:horizontal {
+    border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(30,140,200);
+	margin: 2px 0;
+}</string>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="sliderPosition">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::NoTicks</enum>
+        </property>
+        <property name="tickInterval">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QLineEdit" name="HueEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	font: 10pt &quot;Arial&quot;;
+	color: white;
+	background: rgb(55,55,55);
+	selection-background-color: rgb(30,140,200);
+    border: 1px solid rgb(100,100,100);
+    border-radius: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>50</string>
+        </property>
+        <property name="maxLength">
+         <number>3</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="SaturationLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+         </font>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(255,255,255);
+border: none;
+background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Насыщенность</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QSlider" name="SaturationSlider">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QSlider {
+	background: transparent;
+	border: none;
+}
+
+QSlider::groove:horizontal {
+    border: 1px solid rgb(100,100,100);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(55,55,55);
+    margin: 2px 0;
+}
+
+QSlider::handle:horizontal {
+    background: rgb(30,140,200);
+    border: 1px solid rgb(38,179,255);
+	border-radius: 5px;
+    width: 18px;
+    margin: -6px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+}
+
+QSlider::sub-page:horizontal {
+    border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+    height: 8px;
+    background: rgb(30,140,200);
+	margin: 2px 0;
+}</string>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+        <property name="singleStep">
+         <number>1</number>
+        </property>
+        <property name="pageStep">
+         <number>1</number>
+        </property>
+        <property name="value">
+         <number>50</number>
+        </property>
+        <property name="sliderPosition">
+         <number>50</number>
+        </property>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="tickPosition">
+         <enum>QSlider::NoTicks</enum>
+        </property>
+        <property name="tickInterval">
+         <number>0</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QLineEdit" name="SaturationEdit">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>50</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>Arial</family>
+          <pointsize>10</pointsize>
+          <weight>50</weight>
+          <italic>false</italic>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLineEdit {
+	font: 10pt &quot;Arial&quot;;
+	color: white;
+	background: rgb(55,55,55);
+	selection-background-color: rgb(30,140,200);
+    border: 1px solid rgb(100,100,100);
+    border-radius: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>50</string>
+        </property>
+        <property name="maxLength">
+         <number>3</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="RotatedLabel">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="font">
+         <font>
+          <family>MS Shell Dlg 2</family>
+          <pointsize>12</pointsize>
+          <weight>50</weight>
+          <bold>false</bold>
+          <kerning>true</kerning>
+         </font>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(255,255,255);
+border: none;
+background: transparent;</string>
+        </property>
+        <property name="text">
+         <string>Перевернуть изображение</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
+       <widget class="QCheckBox" name="RotatedCheckBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="toolTip">
+         <string/>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QCheckBox {
+    spacing: 5px;
+	border: none;
+}
+
+QCheckBox::indicator {
+	background-color: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100);
+	border-radius: 5px;
+    width: 28px;
+    height: 28px;
+}
+
+QCheckBox::indicator:unchecked {
+    background-color: rgb(60,60,60);
+	border-color: rgb(100,100,100);
+}
+
+QCheckBox::indicator::unchecked:hover
+{
+	background-color: rgb(70,70,70);
+}
+
+QCheckBox::indicator:checked {
+    background-color: rgb(30,140,200);
+	border-color: rgb(38,179,255);
+	image: url(Icons/CheckBoxIndicator.png);
+}
+
+QCheckBox::indicator::checked:hover
+{
+	background-color: rgb(40,150,210);
+}
+
+QToolTip
+{
+	color: white;
+	background-color: rgb(30,140,200);
+	border: 1px solid rgb(38,179,255);
+	border-radius: 3px;
+}</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>10</width>
+          <height>10</height>
+         </size>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" colspan="2">
+       <widget class="QComboBox" name="ClientIPComboBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: white;
+    padding: 1px 18px 1px 5px;
+}
+
+QComboBox:editable {
+    background: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100) ;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable { /* Штука не выдвинута*/
+	background: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100) ;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on { /* Штука выдвинута*/
+	background: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100) ;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+} 
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+
+    border-top-right-radius: 5px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 5px;
+}
+
+QComboBox::down-arrow {
+    image: url(Icons/ComboBoxDownArrow.png);
+	width: 10px;
+	height: 10px;
+	right: 5px;
+} 
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    image: url(Icons/ComboBoxUpArrow.png);
+}
+
+QComboBox QAbstractItemView {
+	color: white;
+	border: 1px solid rgb(100,100,100) ;
+	border-radius: 5px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	background-color: rgb(60,60,60);
+    selection-background-color: rgb(30,140,200);
+}</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="QComboBox" name="CameraNameComboBox">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QComboBox {
+	font: 10pt &quot;MS Shell Dlg 2&quot;;
+	color: white;
+    padding: 1px 18px 1px 5px;
+}
+
+QComboBox:editable {
+    background: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100) ;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable { /* Штука не выдвинута*/
+	background: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100) ;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on { /* Штука выдвинута*/
+	background: rgb(60,60,60);
+	border: 1px solid rgb(100,100,100) ;
+    border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	border-bottom-left-radius: 0px;
+	border-bottom-right-radius: 0px;
+} 
+
+QComboBox::drop-down {
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    width: 15px;
+
+    border-top-right-radius: 5px; /* same radius as the QComboBox */
+    border-bottom-right-radius: 5px;
+}
+
+QComboBox::down-arrow {
+    image: url(Icons/ComboBoxDownArrow.png);
+	width: 10px;
+	height: 10px;
+	right: 5px;
+} 
+
+QComboBox::down-arrow:on { /* shift the arrow when popup is open */
+    image: url(Icons/ComboBoxUpArrow.png);
+}
+
+QComboBox QAbstractItemView {
+	color: white;
+	border: 1px solid rgb(100,100,100) ;
+	border-radius: 5px;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	background-color: rgb(60,60,60);
+    selection-background-color: rgb(30,140,200);
+}</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

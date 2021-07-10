@@ -1,0 +1,7 @@
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+message VideoDeviceMessage{
+  repeated string device_names = 1;
+}

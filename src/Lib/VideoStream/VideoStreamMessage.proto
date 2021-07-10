@@ -1,0 +1,28 @@
+syntax = "proto2";
+
+option optimize_for = LITE_RUNTIME;
+
+message VideoSettings{
+  required string ip = 1;
+  required string device_name = 2;
+  reserved 3;
+  required int32 framerate_numerator = 4;
+  required int32 framerate_denumerator = 5;
+  required int32 brightness = 6;
+  required int32 contrast  = 7;
+  required int32 hue  = 8;
+  required int32 saturation  = 9;
+}
+
+message VideoMessage{
+
+  enum Action {
+    START = 0;
+    STOP = 1;
+  };
+
+  required Action action = 1;
+  reserved 2;
+
+  optional VideoSettings video_settings = 3;
+}

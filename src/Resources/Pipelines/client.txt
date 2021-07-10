@@ -1,0 +1,1 @@
+udpsrc port=8000 ! gdpdepay ! rtph264depay ! decodebin ! autovideoconvert ! appsink sync=false

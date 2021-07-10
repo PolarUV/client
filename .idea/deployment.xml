@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="Jetson (a09973b7-67f2-4068-8bdc-98e270bba01e)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Pi-25-gcc (7df3c253-492c-4416-a195-a4f528474168)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="Pi-clang (d7eba367-8df8-4e75-8492-1989ae86ba9a)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.Z8LimX6mtG" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release-robot" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-pi" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-robot" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release-pi" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Pi-gcc (6a6a7df7-6acb-4001-9105-8c2b8077a7b4)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

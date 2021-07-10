@@ -34,6 +34,7 @@ Thumbs.db
 *.rc
 /.qmake.cache
 /.qmake.stash
+.imgui/
 
 # qtcreator generated files
 *.pro.user*
@@ -68,6 +69,8 @@ Thumbs.db
 
 # Binaries
 # --------
-*.dll
 *.exe
 
+/cmake-build-release-qtcmake/
+/cmake-build-debug-qtcmake/
+/lib/

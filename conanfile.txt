@@ -1,0 +1,51 @@
+[requires]
+    protobuf/3.21.1 #for messages
+
+    boost/1.79.0 #for asio and more stuff
+    zlib/1.2.12
+    zstd/1.5.2 # for compressing
+
+    gstreamer/1.19.2 #for video-streaming
+    gst-plugins-base/1.19.1
+    gst-plugins-good/1.19.1
+    gst-plugins-bad/1.19.1
+    glib/2.72.0
+
+#    qt/5.15.2
+    freetype/2.11.1
+    harfbuzz/4.2.1
+
+    imgui/cci.20220621+1.88.docking
+    glfw/3.3.7
+    glew/2.2.0@#83f5661890f25f068e7727d00222b0cc
+
+#    opencv/4.5.5
+#    ffmpeg/5.0
+#
+#    tensorflow-lite/2.6.0
+
+[options]
+    boost:shared = False
+    boost:asio_no_deprecated = True
+    boost:system_no_deprecated = True
+    boost:filesystem_no_deprecated = True
+    boost:extra_b2_flags = "-defines=BOOST_DISABLE_THREADS"
+
+    gstreamer:shared = False
+    gst-plugins-base:shared = False
+    gst-plugins-good:shared = False
+    glib:shared = False
+
+    qt:shared = False
+    qt:opengl = dynamic
+    qt:with_libjpeg = libjpeg
+
+[generators]
+    cmake
+
+[imports]
+    ./res/bindings, imgui_impl_glfw.cpp -> ../src/renderer/.imgui
+    ./res/bindings, imgui_impl_opengl3.cpp -> ../src/renderer/.imgui
+    ./res/bindings, imgui_impl_glfw.h -> ../src/renderer/.imgui/include
+    ./res/bindings, imgui_impl_opengl3.h -> ../src/renderer/.imgui/include
+    ./res/bindings, imgui_impl_opengl3_loader.h -> ../src/renderer/.imgui/include
