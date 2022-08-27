@@ -39,10 +39,6 @@ if (WIN32)
     endforeach (QT_LIB)
 endif ()
 
-#conan
-include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
-conan_basic_setup()
-
 include_directories(Client PUBLIC ./Lib)
 include_directories(Client PUBLIC ./Renderer/.imgui/include)
 
