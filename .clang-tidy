@@ -1,0 +1,19 @@
+FormatStyle: google
+Checks: 'clang-diagnostic-*,
+clang-analyzer-*,
+performance-*,
+modernize-*,
+cppcoreguidelines-owning*,
+cppcoreguidelines-no-malloc,
+cppcoreguidelines-narrowing-conversation,
+cppcoreguidelines-macro-usage,
+cppcoreguidelines-avoid-*,
+cppcoreguidelines-pro-type-cstyle-cast,
+cppcoreguidelines-pro-type-const-cast,
+cppcoreguidelines-pro-type-static-cast-downcast,
+cppcoreguidelines-slicing,
+cppcoreguidelines-virtual-class-destructor,
+cert-*
+readability-*,
+portability-*,
+hicpp-*'

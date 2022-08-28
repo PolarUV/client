@@ -1,3 +1,3 @@
 project(Renderer)
 
-add_library(Renderer .imgui/imgui_impl_glfw.cpp .imgui/imgui_impl_opengl3.cpp)
+add_library(Renderer imgui_impl_glfw.cpp imgui_impl_opengl3.cpp)
