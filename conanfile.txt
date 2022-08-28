@@ -5,11 +5,11 @@
     zlib/1.2.12
     zstd/1.5.2 # for compressing
 
-#    gstreamer/1.19.2 #for video-streaming
+#    gstreamer/1.19.1 #for video-streaming
 #    gst-plugins-base/1.19.1
 #    gst-plugins-good/1.19.1
 #    gst-plugins-bad/1.19.1
-#    glib/2.72.0
+#    glib/2.73.0
 
 #    freetype/2.11.1
 #    harfbuzz/4.2.1
@@ -30,19 +30,18 @@
     boost:asio_no_deprecated = True
     boost:system_no_deprecated = True
     boost:filesystem_no_deprecated = True
-    boost:extra_b2_flags = "-defines=BOOST_DISABLE_THREADS"
+
+
+    b2:use_cxx_env = True
+    b2:toolset = gcc
 
 #    gstreamer:shared = False
 #    gst-plugins-base:shared = False
 #    gst-plugins-good:shared = False
 #    glib:shared = False
 
+
 [generators]
     cmake
 
 [imports]
-    ./res/bindings, imgui_impl_glfw.cpp -> ../src/renderer/.imgui
-    ./res/bindings, imgui_impl_opengl3.cpp -> ../src/renderer/.imgui
-    ./res/bindings, imgui_impl_glfw.h -> ../src/renderer/.imgui/include
-    ./res/bindings, imgui_impl_opengl3.h -> ../src/renderer/.imgui/include
-    ./res/bindings, imgui_impl_opengl3_loader.h -> ../src/renderer/.imgui/include
