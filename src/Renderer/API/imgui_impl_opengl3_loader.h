@@ -604,6 +604,14 @@ static HMODULE libgl;
 typedef PROC(__stdcall* GL3WglGetProcAddr)(LPCSTR);
 static GL3WglGetProcAddr wgl_get_proc_address;
 
+
+// [ToDo:] fix this macros
+#ifdef __GNUG__
+#pragma GCC diagnostic ignored "-Wcast-function-type"
+#elif __clang__
+#pragma clang diagnostic ignored "-Wcast-function-type"
+#endif
+
 static int open_libgl(void)
 {
     libgl = LoadLibraryA("opengl32.dll");
@@ -612,6 +620,12 @@ static int open_libgl(void)
     wgl_get_proc_address = (GL3WglGetProcAddr)GetProcAddress(libgl, "wglGetProcAddress");
     return GL3W_OK;
 }
+
+#ifdef __GNUG__
+#pragma GCC diagnostic pop
+#elif __clang__
+#pragma clang diagnostic pop
+#endif
 
 static void close_libgl(void) { FreeLibrary(libgl); }
 static GL3WglProc get_proc(const char *proc)
