@@ -8,6 +8,15 @@
 #include <cstdio>
 #include <ranges>
 
+enum SettingsSection {
+    Control,
+    Movement,
+    Camera,
+    Sensors,
+    System,
+    Appearance
+};
+
 static void glfw_error_callback(int error, const char *description) {
     fprintf(stderr, "Glfw Error %d: %s\n", error, description);  // NOLINT
 }
@@ -60,30 +69,9 @@ auto main() -> int {
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version);
 
-    // Load Fonts
-    // - If no fonts are loaded, dear imgui will use the default font. You can
-    // also load multiple fonts and use ImGui::PushFont()/PopFont() to select
-    // them.
-    // - AddFontFromFileTTF() will return the ImFont* so you can store it if you
-    // need to select the font among multiple.
-    // - If the file cannot be loaded, the function will return NULL. Please
-    // handle those errors in your application (e.g. use an assertion, or
-    // display an error and quit).
-    // - The fonts will be rasterized at a given size (w/ oversampling) and
-    // stored into a texture when calling
-    // ImFontAtlas::Build()/GetTexDataAsXXXX(), which ImGui_ImplXXXX_NewFrame
-    // below will call.
-    // - Read 'docs/FONTS.md' for more instructions and details.
-    // - Remember that in C/C++ if you want to include a backslash \ in a string
-    // literal you need to write a double backslash \\ !
-    // io.Fonts->AddFontDefault();
-    // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Roboto-Medium.ttf", 16.0f);
-    // io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
-    // io.Fonts->AddFontFromFileTTF("../../misc/fonts/DroidSans.ttf", 16.0f);
-    // io.Fonts->AddFontFromFileTTF("../../misc/fonts/ProggyTiny.ttf", 10.0f);
-    // ImFont* font =
-    // io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f,
-    // NULL, io.Fonts->GetGlyphRangesJapanese()); IM_ASSERT(font != NULL);
+    // Load font
+    constexpr auto fontSize = 24.0F;
+    imGuiIo.Fonts->AddFontFromFileTTF("Fonts/SegoeUI.ttf", fontSize);
 
     // Our state
     bool show_demo_window = true;
@@ -150,8 +138,7 @@ auto main() -> int {
 
             auto toFrameTime = [](auto framerate) { return 1000.0F / framerate; }; //NOLINT
             const auto framerate = ImGui::GetIO().Framerate;
-            ImGui::TextColored(clear_color, "Application average %.3f ms/frame (%.1f FPS)", //NOLINT
-                               toFrameTime(framerate), framerate);
+            ImGui::TextColored(clear_color, "Application average %.3f ms/frame (%.1f FPS)", toFrameTime(framerate), framerate); //NOLINT
             ImGui::End();
         }
 
@@ -166,6 +153,104 @@ auto main() -> int {
             }
             ImGui::End();
         }
+
+
+        if (ImGui::BeginMainMenuBar()) {
+            if (ImGui::BeginMenu("Menu")) {
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("View", false)) {
+                ImGui::EndMenu();
+            }
+            if (ImGui::BeginMenu("Help", false)) {
+                ImGui::EndMenu();
+            }
+            ImGui::EndMainMenuBar();
+        }
+
+        ImGui::Begin("Settings");
+        {
+            static auto currentSection = SettingsSection::Control;
+
+            constexpr auto sectionSelectorWidth = 200;
+
+            ImGui::BeginChild("Section Selector", ImVec2(sectionSelectorWidth, 0), true);
+            {
+                ImGui::Text("Underwater Vehicle"); //NOLINT
+                ImGui::Spacing();
+                ImGui::Indent();
+                if (ImGui::Selectable("Control", currentSection == SettingsSection::Control)) {
+                    currentSection = SettingsSection::Control;
+                }
+                if (ImGui::Selectable("Movement", currentSection == SettingsSection::Movement)) {
+                    currentSection = SettingsSection::Movement;
+                }
+                if (ImGui::Selectable("Camera", currentSection == SettingsSection::Camera)) {
+                    currentSection = SettingsSection::Camera;
+                }
+                if (ImGui::Selectable("Sensors", currentSection == SettingsSection::Sensors)) {
+                    currentSection = SettingsSection::Sensors;
+                }
+                ImGui::Unindent();
+                ImGui::Spacing();
+
+                ImGui::Text("Client");  // NOLINT
+                ImGui::Spacing();
+                ImGui::Indent();
+                if (ImGui::Selectable("System", currentSection == SettingsSection::System)) {
+                    currentSection = SettingsSection::System;
+                }
+
+                if (ImGui::Selectable("Appearance", currentSection == SettingsSection::Appearance)) {
+                    currentSection = SettingsSection::Appearance;
+                }
+                ImGui::Unindent();
+                ImGui::Spacing();
+            }
+            ImGui::EndChild();
+
+            ImGui::SameLine();
+
+            ImGui::BeginChild("Settings selector", ImVec2(0, 0), true);
+            {
+                if (currentSection == SettingsSection::Movement) {
+                    ImGui::Text("Motors settings"); //NOLINT
+                    ImGui::Spacing();
+                    static int motorsNumber = 8; //NOLINT
+                    ImGui::InputInt("Quantity", &motorsNumber);
+                    ImGui::Spacing();
+                    static int maximumSpeed = 100; //NOLINT
+                    ImGui::SliderInt("Maximum speed", &maximumSpeed, 0, 100); //NOLINT
+                    ImGui::Spacing();
+                    ImGui::Text("Speed coefficients"); //NOLINT
+                    ImGui::Spacing();
+                    if (ImGui::BeginTable("Motor coefficients table", 7, ImGuiTableFlags_Borders)) { //NOLINT
+                        ImGui::TableSetupColumn("No.");
+                        ImGui::TableSetupColumn("Fx");
+                        ImGui::TableSetupColumn("Fy");
+                        ImGui::TableSetupColumn("Fz");
+                        ImGui::TableSetupColumn("Mx");
+                        ImGui::TableSetupColumn("My");
+                        ImGui::TableSetupColumn("Mz");
+                        ImGui::TableHeadersRow();
+                        for (int row = 0; row < motorsNumber; row++) {
+                            ImGui::TableNextRow();
+                            for (int column = 0; column < 7; column++) { //NOLINT
+                                ImGui::TableSetColumnIndex(column);
+                                if (column == 0) {
+                                    ImGui::Text("%d", row + 1); //NOLINT
+                                } else {
+                                    ImGui::Text("0.0"); //NOLINT
+                                }
+                            }
+                        }
+                        ImGui::EndTable();
+                    }
+                }
+            }
+            ImGui::EndChild();
+        }
+        ImGui::End();
 
         // Rendering
         ImGui::Render();
