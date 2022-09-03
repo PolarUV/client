@@ -10,7 +10,7 @@ include_directories(Client PUBLIC ./)
 
 #add_subdirectory(Lib)
 add_subdirectory(Renderer)
-#add_subdirectory(Resources)
+add_subdirectory(Resources)
 #add_subdirectory(ClientApp)
 
 #target_link_libraries(Client ClientApp)
