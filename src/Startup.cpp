@@ -1,27 +1,21 @@
 #include "Startup.hpp"
 
+#include "Renderer/API/imgui_impl_glfw.hpp"
+#include "Renderer/API/imgui_impl_opengl3.hpp"
+
 #include <GLFW/glfw3.h>  // Will drag system OpenGL headers
-#include <Renderer/API/imgui_impl_glfw.h>
-#include <Renderer/API/imgui_impl_opengl3.h>
 #include <imgui.h>
 
 #include <cstdio>
 #include <ranges>
 
-enum SettingsSection {
-    Control,
-    Movement,
-    Camera,
-    Sensors,
-    System,
-    Appearance
-};
+enum SettingsSection { Control, Movement, Camera, Sensors, System, Appearance };
 
 static void glfw_error_callback(int error, const char *description) {
-    fprintf(stderr, "Glfw Error %d: %s\n", error, description);  // NOLINT
+    fprintf(stderr, "Glfw Error %d: %s\n", error, description);
 }
 
-auto main() -> int {
+int main() {
     // Setup window
     glfwSetErrorCallback(glfw_error_callback);
     if (glfwInit() == 0) {
@@ -29,7 +23,7 @@ auto main() -> int {
     }
 
     // GL 3.0 + GLSL 130
-    const char *glsl_version = "#version 130";
+    constexpr std::string_view glsl_version = "#version 130";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
     // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+
@@ -42,7 +36,7 @@ auto main() -> int {
     // Get first monitor
     const GLFWvidmode *mode = glfwGetVideoMode(monitors[0]);
     auto *const window =
-            glfwCreateWindow(mode->width, mode->height, "New PolarUV with Dear ImGui", monitors[0], nullptr);
+        glfwCreateWindow(mode->width, mode->height, "New PolarUV with Dear ImGui", monitors[0], nullptr);
 
     if (window == nullptr) {
         return 1;
@@ -55,11 +49,10 @@ auto main() -> int {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &imGuiIo = ImGui::GetIO();
-    (void) imGuiIo;
-    imGuiIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable; //NOLINT [hicpp-signed-bitwise]
-    // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable
-    // Keyboard Controls io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad; //
-    // Enable Gamepad Controls
+    (void)imGuiIo;
+    imGuiIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 
     // Setup Dear ImGui style
     ImGui::StyleColorsDark();
@@ -67,7 +60,7 @@ auto main() -> int {
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init(glsl_version);
+    ImGui_ImplOpenGL3_Init(glsl_version.data());
 
     // Load font
     constexpr auto fontSize = 24.0F;
@@ -76,7 +69,7 @@ auto main() -> int {
     // Our state
     bool show_demo_window = true;
     bool show_another_window = false;
-    ImVec4 clear_color = ImVec4(0.45F, 0.55f, 0.60f, 1.00f); //NOLINT
+    ImVec4 clear_color = ImVec4(0.45F, 0.55f, 0.60f, 1.00f);
 
     // Main loop
     while (glfwWindowShouldClose(window) == 0) {
@@ -114,7 +107,7 @@ auto main() -> int {
             ImGui::Begin("Hello, world!");
 
             // Display some text (you can use a format strings too)
-            ImGui::TextUnformatted("This is some useful text.");  // NOLINT
+            ImGui::TextUnformatted("This is some useful text.");
 
             // Edit bools storing our window open/close state
             ImGui::Checkbox("Demo Window", &show_demo_window);
@@ -128,17 +121,17 @@ auto main() -> int {
             ImGui::ColorEdit4("clear color", reinterpret_cast<float *>(&clear_color));
 
             if (ImGui::Button("Button")) {
-                // Buttons return true when clicked (most
-                // widgets return true when edited/activated)
+                // Buttons return true when clicked (most widgets return true when edited/activated)
                 counter++;
             }
 
             ImGui::SameLine();
-            ImGui::Text("counter = %d", counter); //NOLINT
+            ImGui::Text("counter = %d", counter);
 
-            auto toFrameTime = [](auto framerate) { return 1000.0F / framerate; }; //NOLINT
+            auto toFrameTime = [](auto framerate) { return 1000.0F / framerate; };
             const auto framerate = ImGui::GetIO().Framerate;
-            ImGui::TextColored(clear_color, "Application average %.3f ms/frame (%.1f FPS)", toFrameTime(framerate), framerate); //NOLINT
+            ImGui::TextColored(clear_color, "Application average %.3f ms/frame (%.1f FPS)", toFrameTime(framerate),
+                               framerate);
             ImGui::End();
         }
 
@@ -147,13 +140,12 @@ auto main() -> int {
             // Pass a pointer to our bool variable
             // (the window will have a closing button that will clear the bool when clicked)
             ImGui::Begin("Another Window", &show_another_window);
-            ImGui::Text("Hello from another window!"); //NOLINT
+            ImGui::Text("Hello from another window!");
             if (ImGui::Button("Close Me")) {
                 show_another_window = false;
             }
             ImGui::End();
         }
-
 
         if (ImGui::BeginMainMenuBar()) {
             if (ImGui::BeginMenu("Menu")) {
@@ -176,7 +168,7 @@ auto main() -> int {
 
             ImGui::BeginChild("Section Selector", ImVec2(sectionSelectorWidth, 0), true);
             {
-                ImGui::Text("Underwater Vehicle"); //NOLINT
+                ImGui::Text("Underwater Vehicle");
                 ImGui::Spacing();
                 ImGui::Indent();
                 if (ImGui::Selectable("Control", currentSection == SettingsSection::Control)) {
@@ -194,7 +186,7 @@ auto main() -> int {
                 ImGui::Unindent();
                 ImGui::Spacing();
 
-                ImGui::Text("Client");  // NOLINT
+                ImGui::Text("Client");
                 ImGui::Spacing();
                 ImGui::Indent();
                 if (ImGui::Selectable("System", currentSection == SettingsSection::System)) {
@@ -214,17 +206,17 @@ auto main() -> int {
             ImGui::BeginChild("Settings selector", ImVec2(0, 0), true);
             {
                 if (currentSection == SettingsSection::Movement) {
-                    ImGui::Text("Motors settings"); //NOLINT
+                    ImGui::Text("Motors settings");
                     ImGui::Spacing();
-                    static int motorsNumber = 8; //NOLINT
+                    static int motorsNumber = 8;
                     ImGui::InputInt("Quantity", &motorsNumber);
                     ImGui::Spacing();
-                    static int maximumSpeed = 100; //NOLINT
-                    ImGui::SliderInt("Maximum speed", &maximumSpeed, 0, 100); //NOLINT
+                    static int maximumSpeed = 100;
+                    ImGui::SliderInt("Maximum speed", &maximumSpeed, 0, 100);
                     ImGui::Spacing();
-                    ImGui::Text("Speed coefficients"); //NOLINT
+                    ImGui::Text("Speed coefficients");
                     ImGui::Spacing();
-                    if (ImGui::BeginTable("Motor coefficients table", 7, ImGuiTableFlags_Borders)) { //NOLINT
+                    if (ImGui::BeginTable("Motor coefficients table", 7, ImGuiTableFlags_Borders)) {
                         ImGui::TableSetupColumn("No.");
                         ImGui::TableSetupColumn("Fx");
                         ImGui::TableSetupColumn("Fy");
@@ -235,12 +227,12 @@ auto main() -> int {
                         ImGui::TableHeadersRow();
                         for (int row = 0; row < motorsNumber; row++) {
                             ImGui::TableNextRow();
-                            for (int column = 0; column < 7; column++) { //NOLINT
+                            for (int column = 0; column < 7; column++) {
                                 ImGui::TableSetColumnIndex(column);
                                 if (column == 0) {
-                                    ImGui::Text("%d", row + 1); //NOLINT
+                                    ImGui::Text("%d", row + 1);
                                 } else {
-                                    ImGui::Text("0.0"); //NOLINT
+                                    ImGui::Text("0.0");
                                 }
                             }
                         }
@@ -258,9 +250,7 @@ auto main() -> int {
         int display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClearColor(clear_color.x * clear_color.w,
-                     clear_color.y * clear_color.w,
-                     clear_color.z * clear_color.w,
+        glClearColor(clear_color.x * clear_color.w, clear_color.y * clear_color.w, clear_color.z * clear_color.w,
                      clear_color.w);
         glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
