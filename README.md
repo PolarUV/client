@@ -2,10 +2,9 @@
 This software is the part of PolarUV-project, and runs on the pilot's computer
 
 # Dependencied
-- Qt >= 5.15.2
 - gcc >= 12.1.0
-- conan >= 1.48
-- Windows
+- conan >= 1.52
+- Windows 10
 
 # Pre-Built binaries
 If you want pre-buil binaries add this repo
@@ -21,7 +20,7 @@ This is profile for the pre-build binaries
     arch_build=x86_64
     compiler=gcc
     compiler.cppstd=20
-    compiler.version=11.3
+    compiler.version=12.1
     compiler.threads=win32
     compiler.libcxx=libstdc++11
     build_type=Release
