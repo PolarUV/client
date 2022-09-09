@@ -1,3 +1,44 @@
 ---
 BasedOnStyle: Google
 IndentWidth: 4
+TabWidth: 4
+Standard: c++20
+MaxEmptyLinesToKeep: 1
+ColumnLimit: 120
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: '^"ClientApp/.*.hpp'
+    Priority: 2
+  - Regex: '^"Renderer/API/.*.hpp'
+    Priority: 3
+  - Regex: '^"Lib/.*.hpp'
+    Priority: 4
+  - Regex: '^<.*.h'
+    Priority: 5
+  - Regex: '^<.*'
+    Priority: 6
+  - Regex: '^".*'
+    Priority: 1
+
+AlignArrayOfStructures: Right
+AlignEscapedNewlines: Right
+AlwaysBreakTemplateDeclarations: Yes
+BraceWrapping:
+  AfterClass: false
+  AfterStruct: false
+  AfterEnum: false
+  AfterCaseLabel: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterExternBlock: false
+  AfterUnion: false
+  BeforeCatch: false
+  BeforeElse: false
+  BeforeWhile: false
+  BeforeLambdaBody: false
+  SplitEmptyFunction: false
+  SplitEmptyNamespace: false
+  SplitEmptyRecord: false
+
+---
+
