@@ -11,9 +11,12 @@
 namespace App {
 
 class MovementSettingsWidget final : public IWidget {
+    template <size_t row, size_t column>
+    using StaticMatrix = std::array<std::array<float, column>, row>;
+
    public:
     MovementSettingsWidget();
-    ~MovementSettingsWidget() final;
+    ~MovementSettingsWidget() final = default;
 
     void Draw() final;
 
@@ -21,7 +24,7 @@ class MovementSettingsWidget final : public IWidget {
     int motorsNumber_;
     int maximumSpeed_;
     int gripperFreedom_;
-    std::array<std::array<float, 6>, 12> motorCoefficients_{};
+    StaticMatrix<12, 6> motorCoefficients_{};
 };
 
 }  // namespace App

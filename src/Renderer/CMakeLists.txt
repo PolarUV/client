@@ -1,3 +1,4 @@
 project(Renderer)
 
-add_library(Renderer imgui_impl_glfw.cpp imgui_impl_opengl3.cpp)
+file(GLOB Renderer "*.cpp")
+add_library(Renderer ${Renderer})

@@ -1,26 +1,29 @@
 #ifndef CLIENT_MAINWINDOW_HPP
 #define CLIENT_MAINWINDOW_HPP
 
+#include "Renderer/API/BaseWindow.h"
 #include "Settings/SettingsWindow.hpp"
 
+#include <GLFW/glfw3.h>
 #include <imgui.h>
 
 namespace App {
 
-class MainWindow {
+class MainWindow : public BaseWindow<MainWindow> {
    public:
-    MainWindow();
+    MainWindow() = default;
 
-    ~MainWindow();
+    ~MainWindow() = default;
 
-    void DrawFrame();
+    void DrawFrameImpl();
 
-    static void SetupTheme();
+    template <class T, typename... Args>
+    void AddWindow(Args&&... args) {
+        drawer_.template AddWindow<T>(std::forward<Args>(args)...);
+    }
 
    private:
-    std::unique_ptr<App::SettingsWindow> settingsWindow_;
-
-    bool settingsWindowOpened_;
+    Drawer drawer_;
 };
 
 }  // namespace App
