@@ -12,7 +12,7 @@ namespace App {
 class ControlSettingsWidget final : public IWidget {
    public:
     ControlSettingsWidget();
-    ~ControlSettingsWidget() final;
+    ~ControlSettingsWidget() final = default;
 
     void Draw() final;
 

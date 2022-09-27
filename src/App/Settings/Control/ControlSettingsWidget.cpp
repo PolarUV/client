@@ -51,139 +51,134 @@ ControlSettingsWidget::ControlSettingsWidget() {
     switchStabilizationKeyID_ = 0;
 }
 
-ControlSettingsWidget::~ControlSettingsWidget() {}
-
 void ControlSettingsWidget::Draw() {
-    {
-        if (ImGui::BeginTable("Analog control table", 3)) {
-            ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed);
-            ImGui::TableSetupColumn("Assigned key");
-            ImGui::TableSetupColumn("Inverted", ImGuiTableColumnFlags_WidthFixed);
+    if (ImGui::BeginTable("Analog control table", 3)) {
+        ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed);
+        ImGui::TableSetupColumn("Assigned key");
+        ImGui::TableSetupColumn("Inverted", ImGuiTableColumnFlags_WidthFixed);
 
-            ImGui::TableNextColumn();
-            ImGui::TextDisabled("Действие");
-            ImGui::TableNextColumn();
-            ImGui::TextDisabled("Назначенная клавиша");
-            ImGui::TableNextColumn();
-            ImGui::Indent(5.0F);
-            ImGui::TextDisabled("(?)");
+        ImGui::TableNextColumn();
+        ImGui::TextDisabled("Действие");
+        ImGui::TableNextColumn();
+        ImGui::TextDisabled("Назначенная клавиша");
+        ImGui::TableNextColumn();
+        ImGui::Indent(5.0F);
+        ImGui::TextDisabled("(?)");
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Движение по оси X");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Vx-key", &xAxisMovementKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
-            ImGui::TableNextColumn();
-            ImGui::Checkbox("##Vx-inverted", &xAxisMovementInverted_);
+        ImGui::TableNextColumn();
+        ImGui::Text("Движение по оси X");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Vx-key", &xAxisMovementKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Checkbox("##Vx-inverted", &xAxisMovementInverted_);
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Движение по оси Y");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Vy-key", &yAxisMovementKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
-            ImGui::TableNextColumn();
-            ImGui::Checkbox("##Vy-inverted", &yAxisMovementInverted_);
+        ImGui::TableNextColumn();
+        ImGui::Text("Движение по оси Y");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Vy-key", &yAxisMovementKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Checkbox("##Vy-inverted", &yAxisMovementInverted_);
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Движение по оси Z");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Vz-key", &zAxisMovementKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
-            ImGui::TableNextColumn();
-            ImGui::Checkbox("##Vz-inverted", &zAxisMovementInverted_);
+        ImGui::TableNextColumn();
+        ImGui::Text("Движение по оси Z");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Vz-key", &zAxisMovementKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Checkbox("##Vz-inverted", &zAxisMovementInverted_);
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Вращение вокруг оси X");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Wx-key", &xAxisRotationKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
-            ImGui::TableNextColumn();
-            ImGui::Checkbox("##Wx-inverted", &xAxisRotationInverted_);
+        ImGui::TableNextColumn();
+        ImGui::Text("Вращение вокруг оси X");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Wx-key", &xAxisRotationKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Checkbox("##Wx-inverted", &xAxisRotationInverted_);
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Вращение вокруг оси Y");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Wy-key", &yAxisRotationKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
-            ImGui::TableNextColumn();
-            ImGui::Checkbox("##Wy-inverted", &yAxisRotationInverted_);
+        ImGui::TableNextColumn();
+        ImGui::Text("Вращение вокруг оси Y");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Wy-key", &yAxisRotationKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Checkbox("##Wy-inverted", &yAxisRotationInverted_);
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Вращение вокруг оси Z");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Wz-key", &zAxisRotationKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
-            ImGui::TableNextColumn();
-            ImGui::Checkbox("##Wz-inverted", &zAxisRotationInverted_);
+        ImGui::TableNextColumn();
+        ImGui::Text("Вращение вокруг оси Z");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Wz-key", &zAxisRotationKeyID_, analogControlKeys.cbegin(), analogControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Checkbox("##Wz-inverted", &zAxisRotationInverted_);
 
-            ImGui::EndTable();
-        }
+        ImGui::EndTable();
+    }
 
-        ImGui::Spacing();
+    ImGui::Spacing();
 
-        if (ImGui::BeginTable("Discrete control table", 2)) {
-            ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed);
-            ImGui::TableSetupColumn("Assigned key");
+    if (ImGui::BeginTable("Discrete control table", 2)) {
+        ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed);
+        ImGui::TableSetupColumn("Assigned key");
 
-            ImGui::TableNextColumn();
-            ImGui::TextDisabled("Действие");
-            ImGui::TableNextColumn();
-            ImGui::TextDisabled("Назначенная клавиша");
+        ImGui::TableNextColumn();
+        ImGui::TextDisabled("Действие");
+        ImGui::TableNextColumn();
+        ImGui::TextDisabled("Назначенная клавиша");
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Открыть манипулятор");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Gripper+", &openGripperKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Открыть манипулятор");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Gripper+", &openGripperKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Закрыть манипулятор");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Gripper-", &closeGripperKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Закрыть манипулятор");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Gripper-", &closeGripperKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Повернуть камеру вверх");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Camera+", &turnCameraUpKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Повернуть камеру вверх");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Camera+", &turnCameraUpKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Повернуть камеру вниз");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Camera-", &turnCameraDownKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Повернуть камеру вниз");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Camera-", &turnCameraDownKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Сбросить вращение камеры");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Camera~", &resetCameraRotationKeyID_, discreteControlKeys.cbegin(),
-                         discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Сбросить вращение камеры");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Camera~", &resetCameraRotationKeyID_, discreteControlKeys.cbegin(), discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Увеличить яркость фонаря");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Light+", &increaseLightBrightnessKeyID_, discreteControlKeys.cbegin(),
-                         discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Увеличить яркость фонаря");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Light+", &increaseLightBrightnessKeyID_, discreteControlKeys.cbegin(),
+                     discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Уменьшить яркость фонаря");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Light-", &decreaseLightBrightnessKeyID_, discreteControlKeys.cbegin(),
-                         discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Уменьшить яркость фонаря");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Light-", &decreaseLightBrightnessKeyID_, discreteControlKeys.cbegin(),
+                     discreteControlKeys.size());
 
-            ImGui::TableNextColumn();
-            ImGui::Text("Переключить стабилизацию");
-            ImGui::TableNextColumn();
-            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-            ImGui::Combo("##Stabilization~", &switchStabilizationKeyID_, discreteControlKeys.cbegin(),
-                         discreteControlKeys.size());
+        ImGui::TableNextColumn();
+        ImGui::Text("Переключить стабилизацию");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##Stabilization~", &switchStabilizationKeyID_, discreteControlKeys.cbegin(),
+                     discreteControlKeys.size());
 
-            ImGui::EndTable();
-        }
+        ImGui::EndTable();
     }
 }
 

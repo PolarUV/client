@@ -13,21 +13,20 @@
 
 namespace App {
 
-enum SettingsSection { Control, Movement, Camera, Sensors, System, Appearance };
+enum SettingsSection : uint8_t { Control, Movement, Camera, Sensors, System, Appearance };
 
 class SettingsWindow final : public IWindow {
    public:
     SettingsWindow();
-    ~SettingsWindow() final;
+    ~SettingsWindow() final = default;
 
-    void Draw(bool* opened) final;
+    void Draw() final;
 
    private:
+    App::ControlSettingsWidget controlSettingsWidget_;
+    App::MovementSettingsWidget movementSettingsWidget_;
     float sectionSelectorWidth_;
     SettingsSection currentSection_;
-
-    std::unique_ptr<App::ControlSettingsWidget> controlSettingsWidget_;
-    std::unique_ptr<App::MovementSettingsWidget> movementSettingsWidget_;
 };
 
 }  // namespace App

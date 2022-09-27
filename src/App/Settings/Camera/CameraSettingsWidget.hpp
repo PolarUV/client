@@ -10,7 +10,7 @@ namespace App {
 class CameraSettingsWidget final : public IWidget {
    public:
     CameraSettingsWidget();
-    ~CameraSettingsWidget() final;
+    ~CameraSettingsWidget() final = default;
 
     void Draw() final;
 };
