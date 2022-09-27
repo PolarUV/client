@@ -1,7 +1,7 @@
 [requires]
     protobuf/3.21.1 #for messages
 
-    boost/1.79.0 #for asio and more stuff
+    boost/1.80.0 #for asio and more stuff
     zlib/1.2.12
     zstd/1.5.2 # for compressing
 
@@ -30,10 +30,6 @@
     boost:asio_no_deprecated = True
     boost:system_no_deprecated = True
     boost:filesystem_no_deprecated = True
-
-
-    b2:use_cxx_env = True
-    b2:toolset = gcc
 
 #    gstreamer:shared = False
 #    gst-plugins-base:shared = False
