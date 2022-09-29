@@ -7,17 +7,15 @@ MaxEmptyLinesToKeep: 1
 ColumnLimit: 120
 IncludeBlocks: Regroup
 IncludeCategories:
-  - Regex: '^"ClientApp/.*.hpp'
+  - Regex: '^"App/.*.hpp'
     Priority: 2
-  - Regex: '^"Renderer/API/.*.hpp'
+  - Regex: '^".*/API.*.hpp'
     Priority: 3
-  - Regex: '^"Lib/.*.hpp'
-    Priority: 4
   - Regex: '^<.*.h'
-    Priority: 5
+    Priority: 4
   - Regex: '^<.*'
-    Priority: 6
-  - Regex: '^".*'
+    Priority: 5
+  - Regex: '^".*.hpp'
     Priority: 1
 
 AlignArrayOfStructures: Right

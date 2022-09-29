@@ -1,8 +1,9 @@
 #ifndef CLIENT_MAINWINDOW_HPP
 #define CLIENT_MAINWINDOW_HPP
 
-#include "Renderer/API/BaseWindow.h"
 #include "Settings/SettingsWindow.hpp"
+
+#include "Renderer/API/BaseWindow.hpp"
 
 #include <GLFW/glfw3.h>
 #include <imgui.h>
