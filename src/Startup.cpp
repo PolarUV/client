@@ -11,6 +11,7 @@ int main() {
     try {
         auto app = App();
         app.AddWindow<SettingsWindow>();
+        app.AddWindow<ConsoleWindow>();
         app.Run();
     } catch (std::exception& e) {
         PolarError << "Some error occurred: " << e.what();
