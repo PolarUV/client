@@ -1,8 +1,12 @@
+#include "Lib.hpp"
+
 #include "App/MainWindow.hpp"
 
 #include <iostream>
 
 int main() {
+    Lib();
+
     try {
         auto mainWindow = App::MainWindow();
         mainWindow.AddWindow<App::SettingsWindow>();

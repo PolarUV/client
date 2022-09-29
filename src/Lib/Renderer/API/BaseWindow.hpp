@@ -1,8 +1,8 @@
-#ifndef CLIENT_BASEWINDOW_H
-#define CLIENT_BASEWINDOW_H
+#ifndef CLIENT_BASEWINDOW_HPP
+#define CLIENT_BASEWINDOW_HPP
 
-#include "Renderer/API/imgui_impl_glfw.hpp"
-#include "Renderer/API/imgui_impl_opengl3.hpp"
+#include "imgui_impl_glfw.hpp"
+#include "imgui_impl_opengl3.hpp"
 
 #include <GLFW/glfw3.h>
 
@@ -84,4 +84,4 @@ void BaseWindow<T>::Run() {
     glfwTerminate();
 }
 
-#endif  // CLIENT_BASEWINDOW_H
+#endif  // CLIENT_BASEWINDOW_HPP
