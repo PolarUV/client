@@ -1,5 +1,5 @@
-#ifndef CLIENT_MAINWINDOW_HPP
-#define CLIENT_MAINWINDOW_HPP
+#ifndef CLIENT_APP_HPP
+#define CLIENT_APP_HPP
 
 #include "Settings/SettingsWindow.hpp"
 
@@ -8,13 +8,11 @@
 #include <GLFW/glfw3.h>
 #include <imgui.h>
 
-namespace App {
-
-class MainWindow : public BaseWindow<MainWindow> {
+class App : public BaseWindow<App> {
    public:
-    MainWindow() = default;
+    App() = default;
 
-    ~MainWindow() = default;
+    ~App() = default;
 
     void DrawFrameImpl();
 
@@ -27,6 +25,4 @@ class MainWindow : public BaseWindow<MainWindow> {
     Drawer drawer_;
 };
 
-}  // namespace App
-
-#endif  // CLIENT_MAINWINDOW_HPP
+#endif  // CLIENT_APP_HPP

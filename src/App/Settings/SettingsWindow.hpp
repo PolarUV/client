@@ -11,8 +11,6 @@
 
 #include <memory>
 
-namespace App {
-
 enum SettingsSection : uint8_t { Control, Movement, Camera, Sensors, System, Appearance };
 
 class SettingsWindow final : public IWindow {
@@ -23,12 +21,10 @@ class SettingsWindow final : public IWindow {
     void Draw() final;
 
    private:
-    App::ControlSettingsWidget controlSettingsWidget_;
-    App::MovementSettingsWidget movementSettingsWidget_;
+    ControlSettingsWidget controlSettingsWidget_;
+    MovementSettingsWidget movementSettingsWidget_;
     float sectionSelectorWidth_;
     SettingsSection currentSection_;
 };
-
-}  // namespace App
 
 #endif  // CLIENT_SETTINGSWINDOW_HPP

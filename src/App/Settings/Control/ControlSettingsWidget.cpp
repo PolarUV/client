@@ -1,7 +1,5 @@
 #include "ControlSettingsWidget.hpp"
 
-namespace App {
-
 constexpr std::array<const char *, 7> analogControlKeys = {"Нет",
                                                            "Левый джойстик (ось X)",
                                                            "Левый джойстик (ось Y)",
@@ -181,5 +179,3 @@ void ControlSettingsWidget::Draw() {
         ImGui::EndTable();
     }
 }
-
-}  // namespace App

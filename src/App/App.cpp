@@ -1,8 +1,6 @@
-#include "MainWindow.hpp"
+#include "App.hpp"
 
-namespace App {
-
-void MainWindow::DrawFrameImpl() {
+void App::DrawFrameImpl() {
     ImGui::NewFrame();
 
     if (ImGui::BeginMainMenuBar()) {
@@ -22,4 +20,3 @@ void MainWindow::DrawFrameImpl() {
 
     ImGui::Render();
 }
-}  // namespace App

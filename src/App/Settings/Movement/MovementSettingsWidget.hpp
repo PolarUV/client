@@ -8,8 +8,6 @@
 #include <array>
 #include <string>
 
-namespace App {
-
 class MovementSettingsWidget final : public IWidget {
     template <size_t row, size_t column>
     using StaticMatrix = std::array<std::array<float, column>, row>;
@@ -26,7 +24,5 @@ class MovementSettingsWidget final : public IWidget {
     int gripperFreedom_;
     StaticMatrix<12, 6> motorCoefficients_{};
 };
-
-}  // namespace App
 
 #endif  // CLIENT_MOVEMENTSETTINGSWIDGET_HPP
