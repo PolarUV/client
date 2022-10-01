@@ -1,6 +1,7 @@
 #ifndef CLIENT_APP_HPP
 #define CLIENT_APP_HPP
 
+#include "Console/ConsoleWindow.hpp"
 #include "Settings/SettingsWindow.hpp"
 
 #include "Renderer/API/BaseWindow.hpp"

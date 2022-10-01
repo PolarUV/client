@@ -1,4 +1,5 @@
 #include "Lib.hpp"
+#include "Logger/Logger.hpp"
 
 #include "App/App.hpp"
 
@@ -10,9 +11,10 @@ int main() {
     try {
         auto app = App();
         app.AddWindow<SettingsWindow>();
+        app.AddWindow<ConsoleWindow>();
         app.Run();
     } catch (std::exception& e) {
-        std::cerr << "Some error occurred: " << e.what() << std::endl;
+        PolarError << "Some error occurred: " << e.what();
     } catch (...) {
         std::terminate();
     }
