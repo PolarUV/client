@@ -1,4 +1,5 @@
 #include "Lib.hpp"
+#include "Logger/Logger.hpp"
 
 #include "App/App.hpp"
 
@@ -12,7 +13,7 @@ int main() {
         app.AddWindow<SettingsWindow>();
         app.Run();
     } catch (std::exception& e) {
-        std::cerr << "Some error occurred: " << e.what() << std::endl;
+        PolarError << "Some error occurred: " << e.what();
     } catch (...) {
         std::terminate();
     }
