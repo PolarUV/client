@@ -23,6 +23,7 @@ class SettingsWindow final : public IWindow {
    private:
     ControlSettingsWidget controlSettingsWidget_;
     MovementSettingsWidget movementSettingsWidget_;
+    CameraSettingsWidget cameraSettingsWidget_;
     float sectionSelectorWidth_;
     SettingsSection currentSection_;
 };

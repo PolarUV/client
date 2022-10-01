@@ -8,20 +8,34 @@
 MovementSettingsWidget::MovementSettingsWidget() : motorsNumber_(8), maximumSpeed_(100), gripperFreedom_(2) {}
 
 void MovementSettingsWidget::Draw() {
-    ImGui::Text("Настройки движителей");
-    ImGui::Spacing();
+    const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
+    const float availableSpace = ImGui::GetContentRegionAvail().x;
+    const float firstColumnWidth = (availableSpace <= 500) ? ((availableSpace - itemSpacingX) * 0.5F) : 250.0F;
 
-    ImGui::PushItemWidth(ImGui::GetContentRegionAvail().x * 0.5F);
+    ImGui::TextDisabled("Настройки движителей");
 
-    ImGui::InputInt("Количество", &motorsNumber_);
+    if (ImGui::BeginTable("Motors settings table", 2)) {
+        ImGui::TableSetupColumn("Label", ImGuiTableColumnFlags_WidthFixed, firstColumnWidth);
+        ImGui::TableSetupColumn("Input");
 
-    ImGui::SliderInt("Максимальная мощность", &maximumSpeed_, 0, 100);
+        ImGui::TableNextColumn();
+        ImGui::Text("Количество");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::InputInt("##1", &motorsNumber_);
 
-    ImGui::PopItemWidth();
+        ImGui::TableNextRow();
 
-    ImGui::Spacing();
-    ImGui::Text("Коэффициенты мощности движителей");
-    ImGui::Spacing();
+        ImGui::TableNextColumn();
+        ImGui::Text("Максимальная мощность");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::SliderInt("##2", &maximumSpeed_, 0, 100);
+
+        ImGui::EndTable();
+    }
+
+    ImGui::TextDisabled("Коэффициенты мощности движителей");
 
     if (ImGui::BeginTable("Motor coefficients table", 7, ImGuiTableFlags_Borders)) {
         ImGui::TableSetupColumn("No.");
@@ -53,17 +67,22 @@ void MovementSettingsWidget::Draw() {
         ImGui::EndTable();
     }
 
-    ImGui::Spacing();
-    ImGui::Text("Настройки манипулятора");
-    ImGui::Spacing();
+    ImGui::TextDisabled("Настройки манипулятора");
 
-    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x * 0.5F);
+    if (ImGui::BeginTable("Gripper settings table", 2)) {
+        ImGui::TableSetupColumn("Label", ImGuiTableColumnFlags_WidthFixed, firstColumnWidth);
+        ImGui::TableSetupColumn("Input");
 
-    ImGui::SliderInt("Число степеней свободы", &gripperFreedom_, 1, 6);
+        ImGui::TableNextColumn();
+        ImGui::Text("Число степеней свободы");
+        ImGui::TableNextColumn();
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::SliderInt("##1", &gripperFreedom_, 1, 6);
 
-    ImGui::Spacing();
-    ImGui::Text("Коэффициенты мощности манипулятора");
-    ImGui::Spacing();
+        ImGui::EndTable();
+    }
+
+    ImGui::TextDisabled("Коэффициенты мощности манипулятора");
 
     constexpr auto maxDigits = std::numeric_limits<int>::digits10 + 2;
 
@@ -84,9 +103,7 @@ void MovementSettingsWidget::Draw() {
         ImGui::EndTable();
     }
 
-    ImGui::Spacing();
-    ImGui::Text("Коэффициенты стабилизации");
-    ImGui::Spacing();
+    ImGui::TextDisabled("Коэффициенты стабилизации");
 
     if (ImGui::BeginTable("Stabilization coefficients table", 5, ImGuiTableFlags_Borders)) {
         ImGui::TableSetupColumn("Ось");

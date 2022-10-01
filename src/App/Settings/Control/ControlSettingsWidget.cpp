@@ -1,5 +1,8 @@
 #include "ControlSettingsWidget.hpp"
 
+#include <iostream>
+#include <vector>
+
 constexpr std::array<const char *, 7> analogControlKeys = {"Нет",
                                                            "Левый джойстик (ось X)",
                                                            "Левый джойстик (ось Y)",
@@ -24,34 +27,54 @@ constexpr std::array<const char *, 15> discreteControlKeys = {"Нет",
                                                               "Левый джойстик (нажатие)",
                                                               "Правый джойстик (нажатие)"};
 
-ControlSettingsWidget::ControlSettingsWidget() {
-    xAxisMovementKeyID_ = 0;
-    yAxisMovementKeyID_ = 0;
-    zAxisMovementKeyID_ = 0;
-    xAxisRotationKeyID_ = 0;
-    yAxisRotationKeyID_ = 0;
-    zAxisRotationKeyID_ = 0;
+ControlSettingsWidget::ControlSettingsWidget()
+    : gamepadID_(-1),
 
-    xAxisMovementInverted_ = false;
-    yAxisMovementInverted_ = false;
-    zAxisMovementInverted_ = false;
-    xAxisRotationInverted_ = false;
-    yAxisRotationInverted_ = false;
-    zAxisRotationInverted_ = false;
+      xAxisMovementKeyID_(0),
+      yAxisMovementKeyID_(0),
+      zAxisMovementKeyID_(0),
+      xAxisRotationKeyID_(0),
+      yAxisRotationKeyID_(0),
+      zAxisRotationKeyID_(0),
 
-    openGripperKeyID_ = 0;
-    closeGripperKeyID_ = 0;
-    turnCameraUpKeyID_ = 0;
-    turnCameraDownKeyID_ = 0;
-    resetCameraRotationKeyID_ = 0;
-    increaseLightBrightnessKeyID_ = 0;
-    decreaseLightBrightnessKeyID_ = 0;
-    switchStabilizationKeyID_ = 0;
-}
+      xAxisMovementInverted_(false),
+      yAxisMovementInverted_(false),
+      zAxisMovementInverted_(false),
+      xAxisRotationInverted_(false),
+      yAxisRotationInverted_(false),
+      zAxisRotationInverted_(false),
+
+      openGripperKeyID_(0),
+      closeGripperKeyID_(0),
+      turnCameraUpKeyID_(0),
+      turnCameraDownKeyID_(0),
+      resetCameraRotationKeyID_(0),
+      increaseLightBrightnessKeyID_(0),
+      decreaseLightBrightnessKeyID_(0),
+      switchStabilizationKeyID_(0) {}
 
 void ControlSettingsWidget::Draw() {
+    const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
+    const float availableSpace = ImGui::GetContentRegionAvail().x;
+    const float firstColumnWidth = (availableSpace <= 500) ? ((availableSpace - itemSpacingX) * 0.5F) : 250.0F;
+
+    ImGui::TextDisabled("Настройки устройства ввода");
+
+    if (ImGui::BeginTable("Gamepad ID table", 2)) {
+        ImGui::TableSetupColumn("Label", ImGuiTableColumnFlags_WidthFixed, firstColumnWidth);
+        ImGui::TableSetupColumn("Input");
+
+        ImGui::TableNextColumn();
+        ImGui::Text("ID геймпада");
+        ImGui::TableNextColumn();
+        std::vector<const char *> dummyVector;  /// [ToDo: PolarUV-31] Заменить вектор на настоящий вектор геймпадов
+        ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        ImGui::Combo("##1", &gamepadID_, dummyVector.data(), (int)dummyVector.size());
+        ImGui::EndTable();
+    }
+
     if (ImGui::BeginTable("Analog control table", 3)) {
-        ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed);
+        ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed, firstColumnWidth);
         ImGui::TableSetupColumn("Assigned key");
         ImGui::TableSetupColumn("Inverted", ImGuiTableColumnFlags_WidthFixed);
 
@@ -62,6 +85,7 @@ void ControlSettingsWidget::Draw() {
         ImGui::TableNextColumn();
         ImGui::Indent(5.0F);
         ImGui::TextDisabled("(?)");
+        ImGui::Unindent(5.0F);
 
         ImGui::TableNextColumn();
         ImGui::Text("Движение по оси X");
@@ -117,7 +141,7 @@ void ControlSettingsWidget::Draw() {
     ImGui::Spacing();
 
     if (ImGui::BeginTable("Discrete control table", 2)) {
-        ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed);
+        ImGui::TableSetupColumn("Action", ImGuiTableColumnFlags_WidthFixed, firstColumnWidth);
         ImGui::TableSetupColumn("Assigned key");
 
         ImGui::TableNextColumn();
