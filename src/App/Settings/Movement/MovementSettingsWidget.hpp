@@ -14,6 +14,7 @@ class MovementSettingsWidget final : public IWidget {
 
    public:
     MovementSettingsWidget();
+
     ~MovementSettingsWidget() final = default;
 
     void Draw() final;

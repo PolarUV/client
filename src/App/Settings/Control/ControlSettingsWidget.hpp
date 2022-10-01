@@ -15,6 +15,8 @@ class ControlSettingsWidget final : public IWidget {
     void Draw() final;
 
    private:
+    int gamepadID_;
+
     int xAxisMovementKeyID_;
     int yAxisMovementKeyID_;
     int zAxisMovementKeyID_;
