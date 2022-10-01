@@ -7,8 +7,6 @@
 
 #include <array>
 
-namespace App {
-
 class ControlSettingsWidget final : public IWidget {
    public:
     ControlSettingsWidget();
@@ -40,7 +38,5 @@ class ControlSettingsWidget final : public IWidget {
     int decreaseLightBrightnessKeyID_;
     int switchStabilizationKeyID_;
 };
-
-}  // namespace App
 
 #endif  // CLIENT_CONTROLSETTINGSWIDGET_HPP

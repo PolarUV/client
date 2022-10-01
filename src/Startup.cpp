@@ -1,6 +1,6 @@
 #include "Lib.hpp"
 
-#include "App/MainWindow.hpp"
+#include "App/App.hpp"
 
 #include <iostream>
 
@@ -8,9 +8,9 @@ int main() {
     Lib();
 
     try {
-        auto mainWindow = App::MainWindow();
-        mainWindow.AddWindow<App::SettingsWindow>();
-        mainWindow.Run();
+        auto app = App();
+        app.AddWindow<SettingsWindow>();
+        app.Run();
     } catch (std::exception& e) {
         std::cerr << "Some error occurred: " << e.what() << std::endl;
     } catch (...) {

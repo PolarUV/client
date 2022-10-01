@@ -5,8 +5,6 @@
 #include <cassert>
 #include <limits>
 
-namespace App {
-
 MovementSettingsWidget::MovementSettingsWidget() : motorsNumber_(8), maximumSpeed_(100), gripperFreedom_(2) {}
 
 void MovementSettingsWidget::Draw() {
@@ -126,5 +124,3 @@ void MovementSettingsWidget::Draw() {
         ImGui::EndTable();
     }
 }
-
-}  // namespace App

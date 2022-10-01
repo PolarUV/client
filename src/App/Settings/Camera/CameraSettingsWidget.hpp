@@ -5,8 +5,6 @@
 
 #include <imgui.h>
 
-namespace App {
-
 class CameraSettingsWidget final : public IWidget {
    public:
     CameraSettingsWidget();
@@ -14,7 +12,5 @@ class CameraSettingsWidget final : public IWidget {
 
     void Draw() final;
 };
-
-}  // namespace App
 
 #endif  // CLIENT_CAMERASETTINGSWIDGET_HPP

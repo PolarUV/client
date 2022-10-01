@@ -1,6 +1,6 @@
 project(App)
 
-add_library(App MainWindow.cpp MainWindow.hpp)
+add_library(App App.cpp App.hpp)
 
 include_directories(Settings)
 

@@ -1,7 +1,5 @@
 #include "SettingsWindow.hpp"
 
-namespace App {
-
 SettingsWindow::SettingsWindow()
     : IWindow("Настройки", true, ImGuiWindowFlags_NoCollapse),
       controlSettingsWidget_(),
@@ -72,5 +70,3 @@ void SettingsWindow::Draw() {
 
     ImGui::EndChild();
 }
-
-}  // namespace App
