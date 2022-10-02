@@ -53,10 +53,12 @@ Logger&& operator<<(Logger&& logger, const T& value) {
 }
 
 #define PolarPrint(MSG)                                                                                                \
-    std::array<char, 16> _str{};                                                                                       \
-    const auto _time = std::time(nullptr);                                                                             \
-    assert(std::strftime(_str.data(), _str.size(), "%H:%M:%S", std::localtime(&_time)));                               \
-    Logger() << _str.data() << " " #MSG " "
+    {                                                                                                                  \
+        std::array<char, 16> _str{};                                                                                   \
+        const auto _time = std::time(nullptr);                                                                         \
+        assert(std::strftime(_str.data(), _str.size(), "%H:%M:%S", std::localtime(&_time)));                           \
+        Logger() << _str.data() << " " #MSG " "                                                                        \
+    }
 
 #define PolarError PolarPrint([ERROR])
 #define PolarWarning PolarPrint([WARNING])
