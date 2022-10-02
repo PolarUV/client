@@ -1,7 +1,6 @@
 #include "ControlSettingsWidget.hpp"
 
-#include <iostream>
-#include <vector>
+#include "Gamepad/API/Gamepad.hpp"
 
 constexpr std::array<const char *, 7> analogControlKeys = {"Нет",
                                                            "Левый джойстик (ось X)",
@@ -28,7 +27,7 @@ constexpr std::array<const char *, 15> discreteControlKeys = {"Нет",
                                                               "Правый джойстик (нажатие)"};
 
 ControlSettingsWidget::ControlSettingsWidget()
-    : gamepadID_(-1),
+    : gamepadID_(0),
 
       xAxisMovementKeyID_(0),
       yAxisMovementKeyID_(0),
@@ -67,9 +66,9 @@ void ControlSettingsWidget::Draw() {
         ImGui::TableNextColumn();
         ImGui::Text("ID геймпада");
         ImGui::TableNextColumn();
-        std::vector<const char *> dummyVector;  /// [ToDo: PolarUV-31] Заменить вектор на настоящий вектор геймпадов
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##1", &gamepadID_, dummyVector.data(), (int)dummyVector.size());
+        const auto activeGamepads = Gamepad::GetActiveGamepads();
+        ImGui::Combo("##1", &gamepadID_, activeGamepads.data());
         ImGui::EndTable();
     }
 
