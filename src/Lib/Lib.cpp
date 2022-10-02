@@ -1,2 +1,12 @@
+#include "Gamepad/API/Gamepad.hpp"
 
-int Lib() { return 1; }
+#include <GLFW/glfw3.h>
+
+int Lib() {
+    glfwInit();
+
+    glfwSetJoystickCallback(Gamepad::AddGamepadCallback);
+    Gamepad::InitGamepads();
+
+    return 0;
+}
