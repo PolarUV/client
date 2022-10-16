@@ -3,9 +3,10 @@
 #include "Logger/Logger.hpp"
 
 #include <GLFW/glfw3.h>
-#include <algorithm>
+
 #include <boost/container/flat_set.hpp>
 
+#include <algorithm>
 #include <string_view>
 
 namespace {
