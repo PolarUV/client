@@ -11,11 +11,13 @@ IncludeCategories:
     Priority: 2
   - Regex: '^".*/API.*.hpp'
     Priority: 3
-  - Regex: '^<.*.h'
+  - Regex: '^<.*.h>'
     Priority: 4
-  - Regex: '^<.*'
+  - Regex: '^<.*.hpp>'
     Priority: 5
-  - Regex: '^".*.hpp'
+  - Regex: '^<.*>'
+    Priority: 6
+  - Regex: '^".*.hpp"'
     Priority: 1
 
 AlignArrayOfStructures: Right

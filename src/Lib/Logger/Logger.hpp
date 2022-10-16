@@ -1,10 +1,10 @@
 #ifndef CLIENT_LOGGER_HPP
 #define CLIENT_LOGGER_HPP
-#include <chrono>
 #include <imgui.h>
 
 #include <array>
 #include <cassert>
+#include <chrono>
 #include <fstream>
 #include <sstream>
 
