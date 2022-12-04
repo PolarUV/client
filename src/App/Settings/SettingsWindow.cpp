@@ -37,6 +37,9 @@ void SettingsWindow::Draw() {
         if (ImGui::Selectable("Система", currentSection_ == SettingsSection::System)) {
             currentSection_ = SettingsSection::System;
         }
+        if (ImGui::Selectable("Сеть", currentSection_ == SettingsSection::Network)) {
+            currentSection_ = SettingsSection::Network;
+        }
         if (ImGui::Selectable("Внешний вид", currentSection_ == SettingsSection::Appearance)) {
             currentSection_ = SettingsSection::Appearance;
         }
@@ -67,6 +70,10 @@ void SettingsWindow::Draw() {
         }
         case SettingsSection::Camera: {
             cameraSettingsWidget_.Draw();
+            break;
+        }
+        case SettingsSection::Network: {
+            networkSettingsWidget_.Draw();
             break;
         }
         default: {

@@ -1,9 +1,10 @@
 #ifndef CLIENT_SETTINGSWINDOW_HPP
 #define CLIENT_SETTINGSWINDOW_HPP
 
-#include "App/Settings/Camera/CameraSettingsWidget.hpp"
-#include "App/Settings/Control/ControlSettingsWidget.hpp"
-#include "App/Settings/Movement/MovementSettingsWidget.hpp"
+#include "App/Settings/CameraSettings/CameraSettingsWidget.hpp"
+#include "App/Settings/ControlSettings/ControlSettingsWidget.hpp"
+#include "App/Settings/MovementSettings/MovementSettingsWidget.hpp"
+#include "App/Settings/NetworkSettings/NetworkSettingsWidget.hpp"
 
 #include "Renderer/API/IWindow.hpp"
 
@@ -11,7 +12,7 @@
 
 #include <memory>
 
-enum SettingsSection : uint8_t { Control, Movement, Camera, Sensors, System, Appearance };
+enum SettingsSection : uint8_t { Control, Movement, Camera, Sensors, System, Network, Appearance };
 
 class SettingsWindow final : public IWindow {
    public:
@@ -24,6 +25,7 @@ class SettingsWindow final : public IWindow {
     ControlSettingsWidget controlSettingsWidget_;
     MovementSettingsWidget movementSettingsWidget_;
     CameraSettingsWidget cameraSettingsWidget_;
+    NetworkSettingsWidget networkSettingsWidget_;
     float sectionSelectorWidth_;
     SettingsSection currentSection_;
 };

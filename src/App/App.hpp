@@ -3,7 +3,6 @@
 
 #include "Console/ConsoleWindow.hpp"
 #include "Settings/SettingsWindow.hpp"
-#include "Network/NetworkWindow.hpp"
 
 #include "Renderer/API/BaseWindow.hpp"
 

@@ -1,11 +1,13 @@
 project(Settings)
 
-add_subdirectory(Control)
-add_subdirectory(Movement)
-add_subdirectory(Camera)
+add_subdirectory(ControlSettings)
+add_subdirectory(MovementSettings)
+add_subdirectory(CameraSettings)
+add_subdirectory(NetworkSettings)
 
 add_library(Settings SettingsWindow.hpp SettingsWindow.cpp)
 
-target_link_libraries(Settings Control)
-target_link_libraries(Settings Movement)
-target_link_libraries(Settings Camera)
+target_link_libraries(Settings ControlSettings)
+target_link_libraries(Settings MovementSettings)
+target_link_libraries(Settings CameraSettings)
+target_link_libraries(Settings NetworkSettings)

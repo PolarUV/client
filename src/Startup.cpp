@@ -14,7 +14,6 @@ int main() {
         auto app = App();
         app.AddWindow<SettingsWindow>();
         app.AddWindow<ConsoleWindow>();
-        app.AddWindow<NetworkWindow>();
         app.Run();
     } catch (const ExitException& e) {
         return EXIT_SUCCESS;
