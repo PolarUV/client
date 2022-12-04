@@ -9,7 +9,8 @@ constexpr bool isOpened =
     true;
 #endif
 
-ConsoleWindow::ConsoleWindow() : IWindow("Debug console", isOpened, ImGuiWindowFlags_NoCollapse) {}
+ConsoleWindow::ConsoleWindow()
+    : IWindow("Отладочная консоль", isOpened, ImGuiWindowFlags_NoCollapse, ImVec2(320, 240)) {}
 
 void ConsoleWindow::Draw() {
     ImGui::TextUnformatted(Logger::GetBuffer().begin(), Logger::GetBuffer().end());
