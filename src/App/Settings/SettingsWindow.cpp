@@ -1,7 +1,7 @@
 #include "SettingsWindow.hpp"
 
 SettingsWindow::SettingsWindow()
-    : IWindow("Настройки", true, ImGuiWindowFlags_NoCollapse),
+    : IWindow("Настройки", true, ImGuiWindowFlags_NoCollapse,ImVec2(800,800)),
       controlSettingsWidget_(),
       movementSettingsWidget_(),
       cameraSettingsWidget_(),

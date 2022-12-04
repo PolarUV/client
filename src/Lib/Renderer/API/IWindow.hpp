@@ -3,9 +3,11 @@
 
 #include <imgui.h>
 
+#include <array>
 #include <memory>
 #include <string_view>
 #include <vector>
+#include <limits>
 
 class Drawer;
 
@@ -13,24 +15,49 @@ class IWindow {
     friend Drawer;
 
    public:
-    IWindow(const std::string_view& name, bool isOpened, ImGuiWindowFlags flags)
-        : WindowName(name), Flags(flags), IsOpened(isOpened) {}
+    IWindow(const std::string_view& name, bool isOpened, ImGuiWindowFlags flags, ImVec2 size)
+        : WindowName(name), Size(size), Flags(flags), IsOpened(isOpened) {}
     virtual void Draw() = 0;
     virtual ~IWindow() = default;
 
    private:
     const std::string_view WindowName;
+    ImVec2 Size;
     ImGuiWindowFlags Flags;
     bool IsOpened;
 };
 
 class Drawer {
    public:
-    void operator()() {
+    void DrawWindows() {
         for (auto& window : windows_) {
-            ImGui::Begin(window->WindowName.data(), &(window->IsOpened), window->Flags);
-            window->Draw();
-            ImGui::End();
+            if (window->IsOpened) {
+                ImGui::SetNextWindowSize(ImVec2(window->Size.x, window->Size.y), ImGuiCond_Appearing);
+                ImGui::Begin(window->WindowName.data(), &(window->IsOpened), window->Flags);
+                window->Draw();
+                ImGui::End();
+            }
+        }
+    }
+
+    void DrawWindowsState() {
+        if (ImGui::BeginTable("Analog control table", 2)) {
+            ImGui::TableSetupColumn("Window name", ImGuiTableColumnFlags_WidthFixed);
+            ImGui::TableSetupColumn("Window state");
+
+            int index = 0;
+            for (auto& window : windows_) {
+                ImGui::TableNextColumn();
+                ImGui::Text(window->WindowName.data());
+                ImGui::TableNextColumn();
+                static constexpr auto size = std::numeric_limits<decltype(index)>::digits10 + 2 + 2;
+                std::array<char, size> label = {};
+                assert(snprintf(label.begin(), label.size(), "##%d", index) != -1);
+                ImGui::Checkbox(label.begin(), &(window->IsOpened));
+                index++;
+            }
+
+            ImGui::EndTable();
         }
     }
 
