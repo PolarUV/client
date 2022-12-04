@@ -1,12 +1,8 @@
-#include "NetworkWindow.hpp"
+#include "NetworkSettingsWidget.hpp"
 
-#include "Logger/Logger.hpp"
+NetworkSettingsWidget::NetworkSettingsWidget() : robotIP_("XXX.XXX.XXX.XXX") {}
 
-NetworkWindow::NetworkWindow()
-    : IWindow("Сеть", true, ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoDocking,
-              ImVec2(350, 120)) {}
-
-void NetworkWindow::Draw() {
+void NetworkSettingsWidget::Draw() {
     if (ImGui::BeginTable("Network settings", 2)) {
         ImGui::TableSetupColumn("Parameter", ImGuiTableColumnFlags_WidthFixed, 150);
         ImGui::TableSetupColumn("Value");
