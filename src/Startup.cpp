@@ -1,4 +1,3 @@
-#include "Exceptions/ExitException.hpp"
 #include "Lib.hpp"
 #include "Logger/Logger.hpp"
 
@@ -15,12 +14,11 @@ int main() {
         app.AddWindow<SettingsWindow>();
         app.AddWindow<ConsoleWindow>();
         app.Run();
-    } catch (const ExitException& e) {
-        return EXIT_SUCCESS;
-    } catch (const std::exception& e) {
+    } catch (const std::exception &e) {
         PolarError << "Some error occurred: " << e.what();
+        return EXIT_FAILURE;
     } catch (...) {
         std::terminate();
     }
-    return EXIT_FAILURE;
+    return EXIT_SUCCESS;
 }
