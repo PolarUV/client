@@ -15,29 +15,32 @@ void SetupFont(float fontSize, const std::array<ImWchar, 5> &ranges);
 void SetupTheme();
 GLFWwindow *InitOpenGL();
 
-template <class T>
+template<class T>
 class BaseWindow {
-   private:
+public:
+    void Run();
+
+protected:
+    BaseWindow();
+
+    auto GetBaseWindow(){ return window_; }
+
+private:
     GLFWwindow *window_;
 
     T &Derrived() { return *static_cast<T *>(this); }
 
     static constexpr std::array<ImWchar, 5> ranges_ = {
-        0x0020, 0x00FF,  // Basic Latin + Latin Supplement
-        0x0400, 0x044F,  // Cyrillic
-        0,
+            0x0020, 0x00FF,  // Basic Latin + Latin Supplement
+            0x0400, 0x044F,  // Cyrillic
+            0,
     };
 
     static constexpr auto fontSize_ = 24.0F;
 
-   protected:
-    BaseWindow();
-
-   public:
-    void Run();
 };
 
-template <class T>
+template<class T>
 BaseWindow<T>::BaseWindow() {
     SetupImGui();
     SetupFont(fontSize_, ranges_);
@@ -49,7 +52,7 @@ BaseWindow<T>::BaseWindow() {
     }
 }
 
-template <class T>
+template<class T>
 void BaseWindow<T>::Run() {
     // Main loop
     while (glfwWindowShouldClose(window_) == 0) {

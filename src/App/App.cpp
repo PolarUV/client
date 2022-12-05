@@ -1,7 +1,5 @@
 #include "App.hpp"
 
-#include "Exceptions/ExitException.hpp"
-
 void App::DrawFrameImpl() {
     ImGui::NewFrame();
 
@@ -12,7 +10,7 @@ void App::DrawFrameImpl() {
         }
         ImGui::SetCursorPosX(ImGui::GetContentRegionMax().x + ImGui::GetStyle().ItemSpacing.x - 100);
         if (ImGui::Button("Закрыть", ImVec2(100, 31))) {
-            throw ExitException();
+            glfwSetWindowShouldClose(GetBaseWindow(), GLFW_TRUE);
         }
         ImGui::EndMainMenuBar();
     }
