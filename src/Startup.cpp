@@ -13,6 +13,7 @@ int main() {
         auto app = App();
         app.AddWindow<SettingsWindow>();
         app.AddWindow<ConsoleWindow>();
+        app.AddWindow<DisplayWindow>();
         app.Run();
     } catch (const std::exception &e) {
         PolarError << "Some error occurred: " << e.what();

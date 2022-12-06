@@ -72,6 +72,7 @@ void SetupTheme() {
     style.FrameBorderSize = 1.0F;
     style.WindowBorderSize = 1.0F;
     style.PopupBorderSize = 1.0F;
+    style.WindowMenuButtonPosition = ImGuiDir_None;
     auto &colors = style.Colors;
     colors[ImGuiCol_Text] = ImVec4(0.95F, 0.95F, 0.95F, 1.00F);
     colors[ImGuiCol_TextDisabled] = ImVec4(0.50F, 0.50F, 0.50F, 1.00F);

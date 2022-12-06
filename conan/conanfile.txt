@@ -5,6 +5,8 @@
     zlib/1.2.12
     zstd/1.5.2 # for compressing
 
+    stb/cci.20220909 # for loading images
+
 #    gstreamer/1.19.1 #for video-streaming
 #    gst-plugins-base/1.19.1
 #    gst-plugins-good/1.19.1
