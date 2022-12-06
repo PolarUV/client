@@ -2,9 +2,6 @@
 
 SettingsWindow::SettingsWindow()
     : IWindow("Настройки", true, ImGuiWindowFlags_NoCollapse,ImVec2(800,800)),
-      controlSettingsWidget_(),
-      movementSettingsWidget_(),
-      cameraSettingsWidget_(),
       sectionSelectorWidth_(250.0F),
       currentSection_(SettingsSection::Control) {}
 

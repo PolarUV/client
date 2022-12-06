@@ -3,6 +3,7 @@
 
 #include "Console/ConsoleWindow.hpp"
 #include "Settings/SettingsWindow.hpp"
+#include "Display/DisplayWindow.hpp"
 
 #include "Renderer/API/BaseWindow.hpp"
 
