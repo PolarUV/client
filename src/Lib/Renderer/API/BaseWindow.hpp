@@ -11,7 +11,7 @@
 
 void glfw_error_callback(int error, const char *description);
 void SetupImGui();
-void SetupFont(float fontSize, const std::array<ImWchar, 5> &ranges);
+void SetupFont(std::string_view fontName, float fontSize, const std::array<ImWchar, 5> &ranges);
 void SetupTheme();
 GLFWwindow *InitOpenGL();
 
@@ -20,10 +20,12 @@ class BaseWindow {
 public:
     void Run();
 
+    ~BaseWindow();
+
 protected:
     BaseWindow();
 
-    auto GetBaseWindow(){ return window_; }
+    auto GetBaseWindow() { return window_; }
 
 private:
     GLFWwindow *window_;
@@ -38,18 +40,30 @@ private:
 
     static constexpr auto fontSize_ = 24.0F;
 
+    static constexpr std::string_view fontName_ = "Fonts/SegoeUI.ttf";
 };
 
 template<class T>
 BaseWindow<T>::BaseWindow() {
     SetupImGui();
-    SetupFont(fontSize_, ranges_);
+    SetupFont(fontName_, fontSize_, ranges_);
     SetupTheme();
 
     window_ = InitOpenGL();
-    if (window_ == nullptr) {
+    if (window_ == nullptr) [[unlikely]] {
         throw std::runtime_error("OpenGL window isn't initialized");
     }
+}
+
+template<class T>
+BaseWindow<T>::~BaseWindow() {
+    // Cleanup
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+
+    glfwDestroyWindow(window_);
+    glfwTerminate();
 }
 
 template<class T>
@@ -77,14 +91,6 @@ void BaseWindow<T>::Run() {
 
         glfwSwapBuffers(window_);
     }
-
-    // Cleanup
-    ImGui_ImplOpenGL3_Shutdown();
-    ImGui_ImplGlfw_Shutdown();
-    ImGui::DestroyContext();
-
-    glfwDestroyWindow(window_);
-    glfwTerminate();
 }
 
 #endif  // CLIENT_BASEWINDOW_HPP
