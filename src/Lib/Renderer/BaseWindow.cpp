@@ -28,7 +28,7 @@ GLFWwindow *InitOpenGL() {
     // Get first monitor
     const GLFWvidmode *mode = glfwGetVideoMode(monitors[0]);
     auto *const window =
-        glfwCreateWindow(mode->width, mode->height, "New PolarUV with Dear ImGui", monitors[0], nullptr);
+            glfwCreateWindow(mode->width, mode->height, "New PolarUV with Dear ImGui", monitors[0], nullptr);
 
     if (window == nullptr) {
         return window;
@@ -54,8 +54,8 @@ void SetupImGui() {
     imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
 }
 
-void SetupFont(float fontSize, const std::array<ImWchar, 5> &ranges) {
-    ImGui::GetIO().Fonts->AddFontFromFileTTF("Fonts/SegoeUI.ttf", fontSize, nullptr, ranges.cbegin());
+void SetupFont(std::string_view fontName, float fontSize, const std::array<ImWchar, 5> &ranges) {
+    ImGui::GetIO().Fonts->AddFontFromFileTTF(fontName.data(), fontSize, nullptr, ranges.cbegin());
 }
 
 void SetupTheme() {
