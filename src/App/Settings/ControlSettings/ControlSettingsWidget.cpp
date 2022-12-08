@@ -1,6 +1,7 @@
 #include "ControlSettingsWidget.hpp"
 
 #include "Gamepad/API/Gamepad.hpp"
+#include "Network/API/Protocol.hpp"
 
 #include <windows.h>
 #include <winuser.h>
@@ -36,9 +37,7 @@ static void GetInput(HWND a, UINT b, UINT_PTR c, DWORD d) {
     const auto &settings = Gamepad::Settings::get();
     [[maybe_unused]] const auto commands = Gamepad::GetCommands(settings.GamepadId, settings);
 
-    // std::cout << commands << std::endl;
-
-    // [TODO] send commands via network
+    Protocol().SendWriteRequest({reinterpret_cast<const char*>(&commands), sizeof(commands)}, 3);
 }
 
 void ControlSettingsWidget::DrawImpl() {
