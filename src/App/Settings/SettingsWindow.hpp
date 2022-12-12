@@ -12,7 +12,7 @@
 
 #include <memory>
 
-enum SettingsSection : uint8_t { Control, Movement, Camera, Sensors, System, Network, Appearance };
+enum SettingsSection : uint8_t { Control, Movement, Camera, Network };
 
 class SettingsWindow final : public IWindow {
    public:

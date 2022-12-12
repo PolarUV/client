@@ -16,6 +16,8 @@ void CameraSettingsWidget::Draw() {
         ImGui::Text("IP-адрес компьютера");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+        /// ToDo: получение ip-адресов
+        //clientAddresses_ = GetIps();
         ImGui::Combo("##1", &clientAddressID_, clientAddresses_.data(), (int)clientAddresses_.size());
 
         ImGui::TableNextRow();

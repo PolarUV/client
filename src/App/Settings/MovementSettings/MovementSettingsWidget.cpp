@@ -1,8 +1,7 @@
 #include "MovementSettingsWidget.hpp"
 
-#include <charconv>
-
 #include <cassert>
+#include <charconv>
 #include <limits>
 
 MovementSettingsWidget::MovementSettingsWidget() : motorsNumber_(8), maximumSpeed_(100), gripperFreedom_(2) {}
@@ -55,7 +54,7 @@ void MovementSettingsWidget::Draw() {
                     continue;
                 }
                 std::array<char, 20> label = {};
-                assert(snprintf(label.begin(), label.size(), "##InputText-%d.%d", row, column) != -1);
+                assert(snprintf(label.begin(), label.size(), "##Motor-%d.%d", row, column) != -1);
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0F);
                 ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0, 0, 0, 0));
                 ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
@@ -89,54 +88,23 @@ void MovementSettingsWidget::Draw() {
     if (ImGui::BeginTable("Gripper coefficients table", gripperFreedom_, ImGuiTableFlags_Borders)) {
         for (int column = 0; column < gripperFreedom_; column++) {
             assert(column < maxDigits + 1);
-            char columnStr[maxDigits + 1]{};  // NOLINT
-            auto [endPtr, errc] = std::to_chars(columnStr, columnStr + maxDigits, column);
+            std::array<char, maxDigits+1> columnStr{};
+            auto [endPtr, errc] = std::to_chars(columnStr.begin(), columnStr.end(), column + 1);
             assert(errc == std::errc());
-            ImGui::TableSetupColumn(columnStr);
+            ImGui::TableSetupColumn(columnStr.data());
         }
         ImGui::TableHeadersRow();
         ImGui::TableNextRow();
         for (int column = 0; column < gripperFreedom_; column++) {
             ImGui::TableSetColumnIndex(column);
-            ImGui::Text("0.0");
-        }
-        ImGui::EndTable();
-    }
-
-    ImGui::TextDisabled("Коэффициенты стабилизации");
-
-    if (ImGui::BeginTable("Stabilization coefficients table", 5, ImGuiTableFlags_Borders)) {
-        ImGui::TableSetupColumn("Ось");
-        ImGui::TableSetupColumn("П");
-        ImGui::TableSetupColumn("И");
-        ImGui::TableSetupColumn("Д");
-        ImGui::TableSetupColumn("Включен");
-        ImGui::TableHeadersRow();
-        for (int row = 0; row < 4; row++) {
-            ImGui::TableNextRow();
-            for (int column = 0; column < 4; column++) {
-                ImGui::TableSetColumnIndex(column);
-                if (column == 0) {
-                    switch (row) {
-                        case 0:
-                            ImGui::Text("X");
-                            break;
-                        case 1:
-                            ImGui::Text("Y");
-                            break;
-                        case 2:
-                            ImGui::Text("Z");
-                            break;
-                        case 3:
-                            ImGui::Text("H");
-                            break;
-                        default: {
-                        }
-                    }
-                } else {
-                    ImGui::Text("0.0");
-                }
-            }
+            std::array<char, 20> label = {};
+            assert(snprintf(label.begin(), label.size(), "##Gripper-%d", column) != -1);
+            ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0F);
+            ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0, 0, 0, 0));
+            ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
+            ImGui::InputFloat(label.data(), &gripperCoefficients_[column], 0.0F, 0.0F, "%.2F");
+            ImGui::PopStyleColor();
+            ImGui::PopStyleVar();
         }
         ImGui::EndTable();
     }

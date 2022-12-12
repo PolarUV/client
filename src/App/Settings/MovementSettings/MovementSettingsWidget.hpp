@@ -24,6 +24,7 @@ class MovementSettingsWidget final : public IWidget {
     int maximumSpeed_;
     int gripperFreedom_;
     StaticMatrix<12, 6> motorCoefficients_{};
+    std::array<float, 6> gripperCoefficients_{};
 };
 
 #endif  // CLIENT_MOVEMENTSETTINGSWIDGET_HPP

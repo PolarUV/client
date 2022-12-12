@@ -3,7 +3,7 @@
 SettingsWindow::SettingsWindow()
     : IWindow("Настройки", true, ImGuiWindowFlags_NoCollapse,ImVec2(800,800)),
       sectionSelectorWidth_(250.0F),
-      currentSection_(SettingsSection::Control) {}
+      currentSection_(SettingsSection::Network) {}
 
 void SettingsWindow::Draw() {
     ImGui::BeginGroup();
@@ -14,31 +14,22 @@ void SettingsWindow::Draw() {
         ImGui::TextDisabled("Подводный аппарат");
 
         ImGui::Indent();
-        if (ImGui::Selectable("Управление", currentSection_ == SettingsSection::Control)) {
-            currentSection_ = SettingsSection::Control;
+        if (ImGui::Selectable("Подключение", currentSection_ == SettingsSection::Network)) {
+            currentSection_ = SettingsSection::Network;
         }
-        if (ImGui::Selectable("Движение", currentSection_ == SettingsSection::Movement)) {
+        if (ImGui::Selectable("Движители", currentSection_ == SettingsSection::Movement)) {
             currentSection_ = SettingsSection::Movement;
         }
         if (ImGui::Selectable("Камера", currentSection_ == SettingsSection::Camera)) {
             currentSection_ = SettingsSection::Camera;
         }
-        if (ImGui::Selectable("Датчики", currentSection_ == SettingsSection::Sensors)) {
-            currentSection_ = SettingsSection::Sensors;
-        }
         ImGui::Unindent();
 
-        ImGui::TextDisabled("Программа");
+        ImGui::TextDisabled("Береговая станция");
 
         ImGui::Indent();
-        if (ImGui::Selectable("Система", currentSection_ == SettingsSection::System)) {
-            currentSection_ = SettingsSection::System;
-        }
-        if (ImGui::Selectable("Сеть", currentSection_ == SettingsSection::Network)) {
-            currentSection_ = SettingsSection::Network;
-        }
-        if (ImGui::Selectable("Внешний вид", currentSection_ == SettingsSection::Appearance)) {
-            currentSection_ = SettingsSection::Appearance;
+        if (ImGui::Selectable("Управление", currentSection_ == SettingsSection::Control)) {
+            currentSection_ = SettingsSection::Control;
         }
         ImGui::Unindent();
     }
