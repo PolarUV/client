@@ -6,7 +6,7 @@
 
 MovementSettingsWidget::MovementSettingsWidget() : motorsNumber_(8), maximumSpeed_(100), gripperFreedom_(2) {}
 
-void MovementSettingsWidget::Draw() {
+void MovementSettingsWidget::DrawImpl() {
     const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
     const float availableSpace = ImGui::GetContentRegionAvail().x;
     const float firstColumnWidth = (availableSpace <= 500) ? ((availableSpace - itemSpacingX) * 0.5F) : 250.0F;

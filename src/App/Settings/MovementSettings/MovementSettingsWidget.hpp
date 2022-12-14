@@ -8,18 +8,16 @@
 #include <array>
 #include <string>
 
-class MovementSettingsWidget final : public IWidget {
-    template <size_t row, size_t column>
+class MovementSettingsWidget final : public IWidget<MovementSettingsWidget> {
+    template<size_t row, size_t column>
     using StaticMatrix = std::array<std::array<float, column>, row>;
 
-   public:
+public:
     MovementSettingsWidget();
 
-    ~MovementSettingsWidget() final = default;
+    void DrawImpl();
 
-    void Draw() final;
-
-   private:
+private:
     int motorsNumber_;
     int maximumSpeed_;
     int gripperFreedom_;

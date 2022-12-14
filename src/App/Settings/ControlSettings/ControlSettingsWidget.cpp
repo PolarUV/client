@@ -52,7 +52,7 @@ ControlSettingsWidget::ControlSettingsWidget()
       decreaseLightBrightnessKeyID_(0),
       switchStabilizationKeyID_(0) {}
 
-void ControlSettingsWidget::Draw() {
+void ControlSettingsWidget::DrawImpl() {
     const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
     const float availableSpace = ImGui::GetContentRegionAvail().x;
     const float firstColumnWidth = (availableSpace <= 500) ? ((availableSpace - itemSpacingX) * 0.5F) : 250.0F;

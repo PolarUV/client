@@ -8,13 +8,11 @@
 #include <array>
 #include <string>
 
-class CameraSettingsWidget final : public IWidget {
+class CameraSettingsWidget final : public IWidget<CameraSettingsWidget> {
 public:
     CameraSettingsWidget();
 
-    ~CameraSettingsWidget() final = default;
-
-    void Draw() final;
+    void DrawImpl();
 
 private:
     int addressID_;
