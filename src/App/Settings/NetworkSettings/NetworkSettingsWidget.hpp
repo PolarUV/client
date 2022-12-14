@@ -7,15 +7,13 @@
 
 #include <string>
 
-class NetworkSettingsWidget final : public IWidget {
-   public:
+class NetworkSettingsWidget final : public IWidget<NetworkSettingsWidget> {
+public:
     NetworkSettingsWidget();
 
-    ~NetworkSettingsWidget() final = default;
+    void DrawImpl();
 
-    void Draw() final;
-
-   private:
+private:
     std::string robotIP_;
 };
 

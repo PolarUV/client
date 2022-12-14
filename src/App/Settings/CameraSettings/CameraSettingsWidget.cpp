@@ -7,7 +7,7 @@ CameraSettingsWidget::CameraSettingsWidget() :
         currentAddress_(AdaptersInfo().GetIp(addressID_)),
         currentCamera_("/dev/videoXX") {}
 
-void CameraSettingsWidget::Draw() {
+void CameraSettingsWidget::DrawImpl() {
     const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
     const float availableSpace = ImGui::GetContentRegionAvail().x;
     const float firstColumnWidth = (availableSpace <= 400) ? ((availableSpace - itemSpacingX) * 0.5F) : 200.0F;

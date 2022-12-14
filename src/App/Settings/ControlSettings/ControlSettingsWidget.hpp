@@ -7,14 +7,13 @@
 
 #include <array>
 
-class ControlSettingsWidget final : public IWidget {
-   public:
+class ControlSettingsWidget final : public IWidget<ControlSettingsWidget> {
+public:
     ControlSettingsWidget();
-    ~ControlSettingsWidget() final = default;
 
-    void Draw() final;
+   void DrawImpl();
 
-   private:
+private:
     int gamepadID_;
 
     int xAxisMovementKeyID_;

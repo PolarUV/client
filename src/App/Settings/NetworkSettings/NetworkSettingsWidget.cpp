@@ -2,7 +2,7 @@
 
 NetworkSettingsWidget::NetworkSettingsWidget() : robotIP_("XXX.XXX.XXX.XXX") {}
 
-void NetworkSettingsWidget::Draw() {
+void NetworkSettingsWidget::DrawImpl() {
     if (ImGui::BeginTable("Network settings", 2)) {
         ImGui::TableSetupColumn("Parameter", ImGuiTableColumnFlags_WidthFixed, 150);
         ImGui::TableSetupColumn("Value");
