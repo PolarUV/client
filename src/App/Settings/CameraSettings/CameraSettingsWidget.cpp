@@ -1,7 +1,11 @@
 #include "CameraSettingsWidget.hpp"
+#include "IPFunction.hpp"
 
-CameraSettingsWidget::CameraSettingsWidget()
-    : clientAddress_("XXX.XXX.XXX.XXX"), deviceName_("/dev/videoXX"), clientAddressID_(0), deviceNameID_(0) {}
+CameraSettingsWidget::CameraSettingsWidget() :
+        addressID_(0),
+        cameraID_(0),
+        currentAddress_(AdaptersInfo().GetIp(addressID_)),
+        currentCamera_("/dev/videoXX") {}
 
 void CameraSettingsWidget::Draw() {
     const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
@@ -16,9 +20,13 @@ void CameraSettingsWidget::Draw() {
         ImGui::Text("IP-адрес компьютера");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        /// ToDo: получение ip-адресов
-        //clientAddresses_ = GetIps();
-        ImGui::Combo("##1", &clientAddressID_, clientAddresses_.data(), (int)clientAddresses_.size());
+
+        const AdaptersInfo adaptersInfo;
+
+        const auto ips = GetIps();
+        ImGui::Combo("##1", &addressID_, adaptersInfo.data());
+
+        currentAddress_ = adaptersInfo.GetIp(addressID_);
 
         ImGui::TableNextRow();
 
@@ -26,7 +34,7 @@ void CameraSettingsWidget::Draw() {
         ImGui::Text("Имя устройства");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##2", &deviceNameID_, deviceNames_.data(), (int)deviceNames_.size());
+        ImGui::Combo("##2", &cameraID_, cameras_.data());
 
         ImGui::EndTable();
     }
