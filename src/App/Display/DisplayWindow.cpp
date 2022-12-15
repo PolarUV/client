@@ -41,7 +41,17 @@ ImTextureID LoadTextureFromFile(const char* filename) {
 
 DisplayWindow::DisplayWindow()
     : IWindow("Обзор", true, ImGuiWindowFlags_NoCollapse, ImVec2(320, 240)),
-      background_texture_(LoadTextureFromFile("Icons/Background.png")) {
-}
+      background_texture_(LoadTextureFromFile("Icons/Background.png")) {}
 
-void DisplayWindow::Draw() { ImGui::Image(background_texture_, ImGui::GetContentRegionAvail()); }
+void DisplayWindow::Draw() {
+    if (ImGui::GetContentRegionAvail().x / ImGui::GetContentRegionAvail().y <= imageAspectRatio_) {
+        imageWidth_ = ImGui::GetContentRegionAvail().x;
+        imageHeight_ = imageWidth_ / imageAspectRatio_;
+        ImGui::SetCursorPosY(ImGui::GetCursorPosY() + (ImGui::GetContentRegionAvail().y - imageHeight_) / 2);
+    } else {
+        imageHeight_ = ImGui::GetContentRegionAvail().y;
+        imageWidth_ = imageHeight_ * imageAspectRatio_;
+        ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (ImGui::GetContentRegionAvail().x - imageWidth_) / 2);
+    }
+    ImGui::Image(background_texture_, ImVec2(imageWidth_, imageHeight_));
+}
