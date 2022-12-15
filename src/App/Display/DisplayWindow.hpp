@@ -11,6 +11,9 @@ class DisplayWindow final : public IWindow {
 
    private:
     const ImTextureID background_texture_;
+    float imageAspectRatio_ = 16.0F/9.0F;
+    float imageWidth_ = 0.0F;
+    float imageHeight_ = 0.0F;
 };
 
 #endif  // CLIENT_DISPLAYWINDOW_HPP
