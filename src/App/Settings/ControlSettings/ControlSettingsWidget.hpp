@@ -10,34 +10,11 @@
 class ControlSettingsWidget final : public IWidget<ControlSettingsWidget> {
 public:
     ControlSettingsWidget();
-
-   void DrawImpl();
+    ~ControlSettingsWidget();
+    void DrawImpl();
 
 private:
-    int gamepadID_;
-
-    int xAxisMovementKeyID_;
-    int yAxisMovementKeyID_;
-    int zAxisMovementKeyID_;
-    int xAxisRotationKeyID_;
-    int yAxisRotationKeyID_;
-    int zAxisRotationKeyID_;
-
-    bool xAxisMovementInverted_;
-    bool yAxisMovementInverted_;
-    bool zAxisMovementInverted_;
-    bool xAxisRotationInverted_;
-    bool yAxisRotationInverted_;
-    bool zAxisRotationInverted_;
-
-    int openGripperKeyID_;
-    int closeGripperKeyID_;
-    int turnCameraUpKeyID_;
-    int turnCameraDownKeyID_;
-    int resetCameraRotationKeyID_;
-    int increaseLightBrightnessKeyID_;
-    int decreaseLightBrightnessKeyID_;
-    int switchStabilizationKeyID_;
+    int gamepadId_ = 0;
 };
 
 #endif  // CLIENT_CONTROLSETTINGSWIDGET_HPP

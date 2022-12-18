@@ -1,51 +1,24 @@
 #ifndef CLIENT_GAMEPAD_HPP
 #define CLIENT_GAMEPAD_HPP
 
-#include "CommandsStruct.hpp"
-#include "GamepadSettingsStruct.hpp"
+#include "Commands.hpp"
+#include "Settings.hpp"
 
 #include <array>
 #include <iomanip>
 #include <string>
 #include <vector>
 
-struct Move {
-    std::array<float, 6> Forces;
-};
+namespace Gamepad {
+    const std::vector<int> &GetActiveIds();
 
-class Gamepad {
-   private:
-    static std::vector<int>& ActiveIds();
+    std::string GetActiveGamepads();
 
-    static bool DoesGamepadAllowed(int gamepadId);
+    void InitGamepads();
 
-   public:
-    static const std::vector<int>& GetActiveIds() { return ActiveIds(); }
+    void AddGamepadCallback(int gamepadId, int event);
 
-    static std::string GetActiveGamepads();
+    Commands GetCommands(int gamepadId, const Gamepad::Settings& settings);
 
-    static void InitGamepads();
-
-    static void AddGamepadCallback(int gamepadId, int event);
-
-    explicit Gamepad(int gamepadId);
-
-   private:
-    std::array<float, 6> axes_;
-    std::array<bool, 19> buttons_;
-
-   public:
-    friend std::ostream& operator<<(std::ostream& out, const Gamepad& gamepad);
-};
-
-inline std::ostream& operator<<(std::ostream& out, const Gamepad& gamepad) {
-    out << "[GAMEPAD]\naxes: " << std::setprecision(5);
-
-    for (auto axe : gamepad.axes_) {
-        out << axe << '\t';
-    }
-
-    return out;
-}
-
+} // Gamepad
 #endif  // CLIENT_GAMEPAD_HPP
