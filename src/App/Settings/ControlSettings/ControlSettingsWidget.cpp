@@ -2,60 +2,53 @@
 
 #include "Gamepad/API/Gamepad.hpp"
 
-constexpr std::array<const char *, 7> analogControlKeys = {"Нет",
-                                                           "Левый джойстик (ось X)",
-                                                           "Левый джойстик (ось Y)",
-                                                           "Правый джойстик (ось X)",
-                                                           "Правый джойстик (ось Y)",
-                                                           "Кнопки L1 и L2",
-                                                           "Кнопки R1 и R2"};
+#include <windows.h>
+#include <winuser.h>
 
-constexpr std::array<const char *, 15> discreteControlKeys = {"Нет",
-                                                              "Кнопка 'Вверх'",
-                                                              "Кнопка 'Вниз'",
-                                                              "Кнопка 'Влево'",
-                                                              "Кнопка 'Вправо'",
-                                                              "Кнопка 'Квадрат'",
-                                                              "Кнопка 'Треугольник'",
-                                                              "Кнопка 'Крест'",
-                                                              "Кнопка 'Круг'",
-                                                              "Кнопка 'Поделиться'",
-                                                              "Кнопка 'Параметры'",
-                                                              "Кнопка L1",
-                                                              "Кнопка R1",
-                                                              "Левый джойстик (нажатие)",
-                                                              "Правый джойстик (нажатие)"};
+template<size_t size>
+using StringArray = std::array<const char *, size>;
 
-ControlSettingsWidget::ControlSettingsWidget()
-    : gamepadID_(0),
+inline constexpr StringArray<7> AnalogControlKeys = {"Нет",
+                                                     "Левый джойстик (ось X)",
+                                                     "Левый джойстик (ось Y)",
+                                                     "Правый джойстик (ось X)",
+                                                     "Правый джойстик (ось Y)",
+                                                     "Кнопки L1 и L2",
+                                                     "Кнопки R1 и R2"};
 
-      xAxisMovementKeyID_(0),
-      yAxisMovementKeyID_(0),
-      zAxisMovementKeyID_(0),
-      xAxisRotationKeyID_(0),
-      yAxisRotationKeyID_(0),
-      zAxisRotationKeyID_(0),
+inline constexpr StringArray<15> DiscreteControlKeys = {"Нет",
+                                                        "Кнопка 'Вверх'",
+                                                        "Кнопка 'Вниз'",
+                                                        "Кнопка 'Влево'",
+                                                        "Кнопка 'Вправо'",
+                                                        "Кнопка 'Квадрат'",
+                                                        "Кнопка 'Треугольник'",
+                                                        "Кнопка 'Крест'",
+                                                        "Кнопка 'Круг'",
+                                                        "Кнопка 'Поделиться'",
+                                                        "Кнопка 'Параметры'",
+                                                        "Кнопка L1",
+                                                        "Кнопка R1",
+                                                        "Левый джойстик (нажатие)",
+                                                        "Правый джойстик (нажатие)"};
 
-      xAxisMovementInverted_(false),
-      yAxisMovementInverted_(false),
-      zAxisMovementInverted_(false),
-      xAxisRotationInverted_(false),
-      yAxisRotationInverted_(false),
-      zAxisRotationInverted_(false),
+static void GetInput(HWND a, UINT b, UINT_PTR c, DWORD d) {
+    const auto &settings = Gamepad::Settings::get();
+    [[maybe_unused]] const auto commands = Gamepad::GetCommands(settings.GamepadId, settings);
 
-      openGripperKeyID_(0),
-      closeGripperKeyID_(0),
-      turnCameraUpKeyID_(0),
-      turnCameraDownKeyID_(0),
-      resetCameraRotationKeyID_(0),
-      increaseLightBrightnessKeyID_(0),
-      decreaseLightBrightnessKeyID_(0),
-      switchStabilizationKeyID_(0) {}
+    // std::cout << commands << std::endl;
+
+    // [TODO] send commands via network
+}
 
 void ControlSettingsWidget::DrawImpl() {
+    using namespace Gamepad;
+
     const float itemSpacingX = ImGui::GetStyle().ItemSpacing.x;
     const float availableSpace = ImGui::GetContentRegionAvail().x;
     const float firstColumnWidth = (availableSpace <= 500) ? ((availableSpace - itemSpacingX) * 0.5F) : 250.0F;
+
+    auto &settings = Settings::get();
 
     ImGui::TextDisabled("Настройки устройства ввода");
 
@@ -68,7 +61,7 @@ void ControlSettingsWidget::DrawImpl() {
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
         const auto activeGamepads = Gamepad::GetActiveGamepads();
-        ImGui::Combo("##1", &gamepadID_, activeGamepads.data());
+        ImGui::Combo("##1", &settings.GamepadId, activeGamepads.data());
         ImGui::EndTable();
     }
 
@@ -86,53 +79,54 @@ void ControlSettingsWidget::DrawImpl() {
         ImGui::TextDisabled("(?)");
         ImGui::Unindent(5.0F);
 
+        //TODO: рефакторинг, повторения убрать в цикл
         ImGui::TableNextColumn();
         ImGui::Text("Движение по оси X");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Vx-key", &xAxisMovementKeyID_, analogControlKeys.data(), analogControlKeys.size());
+        ImGui::Combo("##Vx-key", &settings.AxisKeys[Axis::Fx], AnalogControlKeys.data(), AnalogControlKeys.size());
         ImGui::TableNextColumn();
-        ImGui::Checkbox("##Vx-inverted", &xAxisMovementInverted_);
+        ImGui::Checkbox("##Vx-inverted", &settings.AxisInverted[Axis::Fx]);
 
         ImGui::TableNextColumn();
         ImGui::Text("Движение по оси Y");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Vy-key", &yAxisMovementKeyID_, analogControlKeys.data(), analogControlKeys.size());
+        ImGui::Combo("##Vy-key", &settings.AxisKeys[Axis::Fy], AnalogControlKeys.data(), AnalogControlKeys.size());
         ImGui::TableNextColumn();
-        ImGui::Checkbox("##Vy-inverted", &yAxisMovementInverted_);
+        ImGui::Checkbox("##Vy-inverted", &settings.AxisInverted[Axis::Fy]);
 
         ImGui::TableNextColumn();
         ImGui::Text("Движение по оси Z");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Vz-key", &zAxisMovementKeyID_, analogControlKeys.data(), analogControlKeys.size());
+        ImGui::Combo("##Vz-key", &settings.AxisKeys[Axis::Fz], AnalogControlKeys.data(), AnalogControlKeys.size());
         ImGui::TableNextColumn();
-        ImGui::Checkbox("##Vz-inverted", &zAxisMovementInverted_);
+        ImGui::Checkbox("##Vz-inverted", &settings.AxisInverted[Axis::Fy]);
 
         ImGui::TableNextColumn();
         ImGui::Text("Вращение вокруг оси X");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Wx-key", &xAxisRotationKeyID_, analogControlKeys.data(), analogControlKeys.size());
+        ImGui::Combo("##Wx-key", &settings.AxisKeys[Axis::Mx], AnalogControlKeys.data(), AnalogControlKeys.size());
         ImGui::TableNextColumn();
-        ImGui::Checkbox("##Wx-inverted", &xAxisRotationInverted_);
+        ImGui::Checkbox("##Wx-inverted", &settings.AxisInverted[Axis::Mx]);
 
         ImGui::TableNextColumn();
         ImGui::Text("Вращение вокруг оси Y");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Wy-key", &yAxisRotationKeyID_, analogControlKeys.data(), analogControlKeys.size());
+        ImGui::Combo("##Wy-key", &settings.AxisKeys[Axis::My], AnalogControlKeys.data(), AnalogControlKeys.size());
         ImGui::TableNextColumn();
-        ImGui::Checkbox("##Wy-inverted", &yAxisRotationInverted_);
+        ImGui::Checkbox("##Wy-inverted", &settings.AxisInverted[Axis::My]);
 
         ImGui::TableNextColumn();
         ImGui::Text("Вращение вокруг оси Z");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Wz-key", &zAxisRotationKeyID_, analogControlKeys.data(), analogControlKeys.size());
+        ImGui::Combo("##Wz-key", &settings.AxisKeys[Axis::Mz], AnalogControlKeys.data(), AnalogControlKeys.size());
         ImGui::TableNextColumn();
-        ImGui::Checkbox("##Wz-inverted", &zAxisRotationInverted_);
+        ImGui::Checkbox("##Wz-inverted", &settings.AxisInverted[Axis::Mz]);
 
         ImGui::EndTable();
     }
@@ -152,53 +146,67 @@ void ControlSettingsWidget::DrawImpl() {
         ImGui::Text("Открыть манипулятор");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Gripper+", &openGripperKeyID_, discreteControlKeys.data(), discreteControlKeys.size());
+        ImGui::Combo("##Gripper+", &settings.OpenGripperKeyID, DiscreteControlKeys.data(), DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Закрыть манипулятор");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Gripper-", &closeGripperKeyID_, discreteControlKeys.data(), discreteControlKeys.size());
+        ImGui::Combo("##Gripper-", &settings.CloseGripperKeyID, DiscreteControlKeys.data(),
+                     DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Повернуть камеру вверх");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Camera+", &turnCameraUpKeyID_, discreteControlKeys.data(), discreteControlKeys.size());
+        ImGui::Combo("##Camera+", &settings.TurnCameraUpKeyID, DiscreteControlKeys.data(), DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Повернуть камеру вниз");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Camera-", &turnCameraDownKeyID_, discreteControlKeys.data(), discreteControlKeys.size());
+        ImGui::Combo("##Camera-", &settings.TurnCameraDownKeyID, DiscreteControlKeys.data(),
+                     DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Сбросить вращение камеры");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Camera~", &resetCameraRotationKeyID_, discreteControlKeys.data(), discreteControlKeys.size());
+        ImGui::Combo("##Camera~", &settings.ResetCameraRotationKeyID, DiscreteControlKeys.data(),
+                     DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Увеличить яркость фонаря");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Light+", &increaseLightBrightnessKeyID_, discreteControlKeys.data(),
-                     discreteControlKeys.size());
+        ImGui::Combo("##Light+", &settings.IncreaseLightBrightnessKeyID, DiscreteControlKeys.data(),
+                     DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Уменьшить яркость фонаря");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Light-", &decreaseLightBrightnessKeyID_, discreteControlKeys.data(),
-                     discreteControlKeys.size());
+        ImGui::Combo("##Light-", &settings.DecreaseLightBrightnessKeyID, DiscreteControlKeys.data(),
+                     DiscreteControlKeys.size());
 
         ImGui::TableNextColumn();
         ImGui::Text("Переключить стабилизацию");
         ImGui::TableNextColumn();
         ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
-        ImGui::Combo("##Stabilization~", &switchStabilizationKeyID_, discreteControlKeys.data(),
-                     discreteControlKeys.size());
+        ImGui::Combo("##Stabilization~", &settings.SwitchStabilizationKeyID, DiscreteControlKeys.data(),
+                     DiscreteControlKeys.size());
 
         ImGui::EndTable();
     }
 }
+
+
+//ToDo: use asio
+ControlSettingsWidget::ControlSettingsWidget() {
+    SetTimer(nullptr, 0, 10, GetInput);
+}
+
+ControlSettingsWidget::~ControlSettingsWidget() {
+    KillTimer(0, 0);
+}
+
