@@ -2,8 +2,10 @@
 
 #define STB_IMAGE_IMPLEMENTATION
 #include <GL/glew.h>
+#include <stb_image.h>
 
-#include "stb_image.h"
+#include <stdexcept>
+
 
 ImTextureID LoadTextureFromFile(const char* filename) {
     // Load from file

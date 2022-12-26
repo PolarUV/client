@@ -55,7 +55,7 @@ void SetupImGui() {
 }
 
 void SetupFont(std::string_view fontName, float fontSize, const std::array<ImWchar, 5> &ranges) {
-    ImGui::GetIO().Fonts->AddFontFromFileTTF(fontName.data(), fontSize, nullptr, ranges.cbegin());
+    ImGui::GetIO().Fonts->AddFontFromFileTTF(fontName.data(), fontSize, nullptr, ranges.data());
 }
 
 void SetupTheme() {

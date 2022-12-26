@@ -1,6 +1,7 @@
 #ifndef CLIENT_IPFUNCTION_HPP
 #define CLIENT_IPFUNCTION_HPP
 
+#include <windows.h>
 #include <iphlpapi.h>
 
 #include <string>
@@ -55,7 +56,7 @@ public:
             return count == 0;
         });
 
-        std::copy(currentIp.begin(), currentIp.end(), addresses.begin());
+        std::ranges::copy(currentIp.begin(), currentIp.end(), addresses.begin());
 
         return addresses;
     }
