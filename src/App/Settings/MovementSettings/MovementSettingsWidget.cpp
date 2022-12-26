@@ -54,7 +54,7 @@ void MovementSettingsWidget::DrawImpl() {
                     continue;
                 }
                 std::array<char, 20> label = {};
-                assert(snprintf(label.begin(), label.size(), "##Motor-%d.%d", row, column) != -1);
+                assert(snprintf(label.data(), label.size(), "##Motor-%d.%d", row, column) != -1);
                 ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0F);
                 ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0, 0, 0, 0));
                 ImGui::SetNextItemWidth(ImGui::GetColumnWidth());
@@ -89,7 +89,7 @@ void MovementSettingsWidget::DrawImpl() {
         for (int column = 0; column < gripperFreedom_; column++) {
             assert(column < maxDigits + 1);
             std::array<char, maxDigits+1> columnStr{};
-            auto [endPtr, errc] = std::to_chars(columnStr.begin(), columnStr.end(), column + 1);
+            auto [endPtr, errc] = std::to_chars(columnStr.data(), columnStr.data() + columnStr.size(), column + 1);
             assert(errc == std::errc());
             ImGui::TableSetupColumn(columnStr.data());
         }
@@ -98,7 +98,7 @@ void MovementSettingsWidget::DrawImpl() {
         for (int column = 0; column < gripperFreedom_; column++) {
             ImGui::TableSetColumnIndex(column);
             std::array<char, 20> label = {};
-            assert(snprintf(label.begin(), label.size(), "##Gripper-%d", column) != -1);
+            assert(snprintf(label.data(), label.size(), "##Gripper-%d", column) != -1);
             ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0F);
             ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(0, 0, 0, 0));
             ImGui::SetNextItemWidth(ImGui::GetColumnWidth());

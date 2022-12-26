@@ -48,12 +48,12 @@ class Drawer {
             int index = 0;
             for (auto& window : windows_) {
                 ImGui::TableNextColumn();
-                ImGui::Text(window->WindowName.data());
+                ImGui::Text("%s", window->WindowName.data());
                 ImGui::TableNextColumn();
                 static constexpr auto size = std::numeric_limits<decltype(index)>::digits10 + 2 + 2;
                 std::array<char, size> label = {};
-                assert(snprintf(label.begin(), label.size(), "##%d", index) != -1);
-                ImGui::Checkbox(label.begin(), &(window->IsOpened));
+                assert(snprintf(label.data(), label.size(), "##%d", index) != -1);
+                ImGui::Checkbox(label.data(), &(window->IsOpened));
                 index++;
             }
 
