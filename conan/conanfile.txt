@@ -1,8 +1,8 @@
 [requires]
-    protobuf/3.21.1 #for messages
+    protobuf/3.21.9 #for messages
 
-    boost/1.80.0 #for asio and more stuff
-    zlib/1.2.12
+    boost/1.81.0 #for asio and more stuff
+    zlib/1.2.13
     zstd/1.5.2 # for compressing
 
     stb/cci.20220909 # for loading images
@@ -18,7 +18,7 @@
 
     imgui/cci.20220621+1.88.docking
     glfw/3.3.7
-    glew/2.2.0@#83f5661890f25f068e7727d00222b0cc
+    glew/2.2.0
 
     libssh2/1.10.0
 
