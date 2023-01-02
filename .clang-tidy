@@ -31,6 +31,7 @@ cppcoreguidelines-slicing,
 cppcoreguidelines-virtual-class-destructor,
 cert-*
 readability-*,
+-readability-magic-numbers,
 portability-redundant*,
 misc-*'
 WarningsAsErrors: '*'
