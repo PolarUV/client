@@ -6,7 +6,6 @@
 
 #include <stdexcept>
 
-
 ImTextureID LoadTextureFromFile(const char* filename) {
     // Load from file
     int imageWidth = 0;
@@ -54,4 +53,32 @@ void DisplayWindow::Draw() {
         ImGui::SetCursorPosX(ImGui::GetCursorPosX() + (ImGui::GetContentRegionAvail().x - imageWidth_) / 2);
     }
     ImGui::Image(background_texture_, ImVec2(imageWidth_, imageHeight_));
+
+    if constexpr (SENSORS_EMULATION) { //NOLINT
+        ImGui::Begin("Имитация датчиков");
+        ImGui::SliderFloat("Угол крена", &sensorsData_.Roll, 0.0F, 360.0F);
+        ImGui::SliderFloat("Угол дифферента", &sensorsData_.Pitch, 0.0F, 360.0F);
+        ImGui::SliderFloat("Угол курса", &sensorsData_.Yaw, 0.0F, 360.0F);
+        ImGui::SliderFloat("Макс. глубина", &maxDepth_, 5.0F, 30.0F, "%.0F");
+        ImGui::SliderFloat("Глубина", &sensorsData_.Depth, 0.0F, 5.0F);
+        ImGui::Spacing();
+        ImGui::Checkbox("Стабилизация", &stabilization_);
+        if (stabilization_) {
+            ImGui::Spacing();
+            ImGui::SliderFloat("Уставка крена", &targetRoll_, 0.0F, 360.0F);
+            ImGui::SliderFloat("Уставка дифферента", &targetPitch_, 0.0F, 360.0F);
+            ImGui::SliderFloat("Уставка глубины", &targetDepth_, 0.0F, 5.0F);
+        }
+        ImGui::End();
+    }
+
+    // Расчет масштабного коэффициента
+    const float widthScale = imageWidth_ / 1920;
+    const float heightScale = imageHeight_ / 1080;
+    const float scalingFactor = std::min(widthScale, heightScale);
+
+    PaintRollIndicator(scalingFactor, sensorsData_.Roll, targetRoll_, stabilization_);
+    PaintPitchIndicator(scalingFactor, sensorsData_.Pitch, stabilization_, targetPitch_);
+    PaintYawIndicator(scalingFactor, sensorsData_.Yaw);
+    PaintDepthIndicator(scalingFactor, sensorsData_.Depth, stabilization_, targetDepth_, maxDepth_);
 }
