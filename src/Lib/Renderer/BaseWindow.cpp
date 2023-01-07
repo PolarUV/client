@@ -7,37 +7,40 @@ void glfw_error_callback(int error, const char *description) {
     assert(fprintf(stderr, "Glfw Error %d: %s\n", error, description) != -1);
 }
 
+void window_iconify_callback(GLFWwindow *window, int state) {
+    if (state != 0) {
+        glfwSetWindowMonitor(window, nullptr, 0, 0, 640, 480, 0);
+    } else {
+        auto *monitor = glfwGetPrimaryMonitor();
+        const auto *mode = glfwGetVideoMode(monitor);
+        glfwSetWindowMonitor(window, monitor, 0, 0, mode->width, mode->height, mode->refreshRate);
+    }
+}
+
 GLFWwindow *InitOpenGL() {
-    // Setup window
     glfwSetErrorCallback(glfw_error_callback);
     if (glfwInit() == 0) {
         return nullptr;
     }
 
-    // GL 3.0 + GLSL 130
     constexpr std::string_view glsl_version = "#version 130";
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-    // glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);  // 3.2+
-    // only glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE); // 3.0+ only
 
-    // Create window with graphics context
-    int count = 0;
-    auto *const monitors = glfwGetMonitors(&count);
+    auto *monitor = glfwGetPrimaryMonitor();
+    const auto *mode = glfwGetVideoMode(monitor);
 
-    // Get first monitor
-    const GLFWvidmode *mode = glfwGetVideoMode(monitors[0]);
-    auto *const window =
-            glfwCreateWindow(mode->width, mode->height, "New PolarUV with Dear ImGui", monitors[0], nullptr);
+    auto *window = glfwCreateWindow(mode->width, mode->height, "PolarUV Client", monitor, nullptr);
 
     if (window == nullptr) {
         return window;
     }
 
-    glfwMakeContextCurrent(window);
-    glfwSwapInterval(1);  // Enable vsync
+    glfwSetWindowIconifyCallback(window, window_iconify_callback);
 
-    // Setup Platform/Renderer backends
+    glfwMakeContextCurrent(window);
+    glfwSwapInterval(1);
+
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version.data());
 
@@ -45,7 +48,6 @@ GLFWwindow *InitOpenGL() {
 }
 
 void SetupImGui() {
-    // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO &imGuiIo = ImGui::GetIO();
@@ -60,7 +62,6 @@ void SetupFont(std::string_view fontName, float fontSize, const std::array<ImWch
 
 void SetupTheme() {
     auto &style = ImGui::GetStyle();
-    // NOLINTBEGIN
     style.WindowRounding = 3.0F;
     style.ChildRounding = 3.0F;
     style.FrameRounding = 3.0F;
@@ -77,7 +78,6 @@ void SetupTheme() {
     colors[ImGuiCol_Text] = ImVec4(0.95F, 0.95F, 0.95F, 1.00F);
     colors[ImGuiCol_TextDisabled] = ImVec4(0.50F, 0.50F, 0.50F, 1.00F);
     colors[ImGuiCol_WindowBg] = ImVec4(0.12F, 0.12F, 0.12F, 1.00F);
-    // colors[ImGuiCol_ChildBg] = ImVec4(0.04F, 0.04F, 0.04F, 0.50F);
     colors[ImGuiCol_ChildBg] = ImVec4(0.12F, 0.12F, 0.12F, 1.00F);
     colors[ImGuiCol_PopupBg] = ImVec4(0.12F, 0.12F, 0.12F, 0.94F);
     colors[ImGuiCol_Border] = ImVec4(0.25F, 0.25F, 0.27F, 0.50F);
@@ -85,13 +85,10 @@ void SetupTheme() {
     colors[ImGuiCol_FrameBg] = ImVec4(0.20F, 0.20F, 0.22F, 0.50F);
     colors[ImGuiCol_FrameBgHovered] = ImVec4(0.25F, 0.25F, 0.27F, 0.75F);
     colors[ImGuiCol_FrameBgActive] = ImVec4(0.30F, 0.30F, 0.33F, 1.00F);
-    // colors[ImGuiCol_TitleBg] = ImVec4(0.04F, 0.04F, 0.04F, 1.00F);
     colors[ImGuiCol_TitleBg] = ImVec4(0.18F, 0.18F, 0.19F, 1.00F);
-    // colors[ImGuiCol_TitleBgActive] = ImVec4(0.04F, 0.04F, 0.04F, 1.00F);
     colors[ImGuiCol_TitleBgActive] = ImVec4(0.23F, 0.23F, 0.23F, 1.00F);
-    // colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.04F, 0.04F, 0.04F, 0.75F);
     colors[ImGuiCol_TitleBgCollapsed] = ImVec4(0.18F, 0.18F, 0.19F, 1.00F);
-    colors[ImGuiCol_MenuBarBg] = ImVec4(0.18f, 0.18f, 0.19f, 1.00f);
+    colors[ImGuiCol_MenuBarBg] = ImVec4(0.18F, 0.18F, 0.19F, 1.00F);
     colors[ImGuiCol_ScrollbarBg] = ImVec4(0.24F, 0.24F, 0.26F, 0.75F);
     colors[ImGuiCol_ScrollbarGrab] = ImVec4(0.41F, 0.41F, 0.41F, 0.75F);
     colors[ImGuiCol_ScrollbarGrabHovered] = ImVec4(0.62F, 0.62F, 0.62F, 0.75F);
@@ -128,5 +125,4 @@ void SetupTheme() {
     colors[ImGuiCol_NavWindowingHighlight] = ImVec4(1.00F, 1.00F, 1.00F, 0.70F);
     colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80F, 0.80F, 0.80F, 0.20F);
     colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80F, 0.80F, 0.80F, 0.35F);
-    // NOLINTEND
 }
