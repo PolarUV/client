@@ -1,6 +1,7 @@
 #include "Lib/Renderer/API/BaseWindow.hpp"
 
 #include <cstdio>
+#include <filesystem>
 #include <string_view>
 
 void glfw_error_callback(int error, const char *description) {
@@ -49,11 +50,19 @@ GLFWwindow *InitOpenGL() {
 
 void SetupImGui() {
     IMGUI_CHECKVERSION();
+
     ImGui::CreateContext();
+
     ImGuiIO &imGuiIo = ImGui::GetIO();
+
     imGuiIo.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
     imGuiIo.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
+
+    if (!std::filesystem::exists("data")) {
+        std::filesystem::create_directory("data");
+    }
+    imGuiIo.IniFilename = "data/config.ini";
 }
 
 void SetupFont(std::string_view fontName, float fontSize, const std::array<ImWchar, 5> &ranges) {
