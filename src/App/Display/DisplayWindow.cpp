@@ -40,7 +40,7 @@ ImTextureID LoadTextureFromFile(const char* filename) {
 
 DisplayWindow::DisplayWindow()
     : IWindow("Обзор", true, ImGuiWindowFlags_NoCollapse, ImVec2(320, 240)),
-      background_texture_(LoadTextureFromFile("Icons/Background.png")) {}
+      background_texture_(LoadTextureFromFile("icons/Background.png")) {}
 
 void DisplayWindow::Draw() {
     if (ImGui::GetContentRegionAvail().x / ImGui::GetContentRegionAvail().y <= imageAspectRatio_) {
