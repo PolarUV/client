@@ -40,7 +40,7 @@ private:
 
     static constexpr auto fontSize_ = 24.0F;
 
-    static constexpr std::string_view fontName_ = "Fonts/SegoeUI.ttf";
+    static constexpr std::string_view fontName_ = "fonts/SegoeUI.ttf";
 };
 
 template<class T>

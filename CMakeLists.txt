@@ -48,4 +48,5 @@ else ()
 endif ()
 
 add_subdirectory(src)
+add_subdirectory(resources)
 target_link_libraries(Client ${CONAN_LIBS})
