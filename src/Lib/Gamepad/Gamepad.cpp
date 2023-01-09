@@ -42,7 +42,7 @@ namespace {
 
         if (val > 0) {
             for (size_t i = 0; i < coefficients.size(); ++i) {
-                const auto coefficient = i % 2 == 1 ? coefficients[i] : -coefficients[i];
+                const auto coefficient = i % 2 == 0 ? coefficients[i] : -coefficients[i];
                 out += coefficient * std::pow(val, i + 1);
             }
             return static_cast<float>(out);
@@ -138,10 +138,11 @@ enum AxisMap : size_t {
 enum ButtonsMap {
 };
 
-Gamepad::Commands Gamepad::GetCommands(int gamepadId, [[maybe_unused]] const Gamepad::Settings &settings) {
+Gamepad::Commands Gamepad::GetCommands(const Gamepad::Settings &settings) {
     using MoveEnum = Gamepad::Commands::MoveEnum;
     using GripperEnum = Gamepad::Commands::GripperEnum;
 
+    const auto gamepadId = settings.GamepadId;
     static const std::vector<double> coefficients{0.398522, 0.22634, 0.819158};
 
     Gamepad::Commands commands{};
