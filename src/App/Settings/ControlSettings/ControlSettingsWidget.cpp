@@ -35,9 +35,9 @@ inline constexpr StringArray<15> DiscreteControlKeys = {"Нет",
 
 static void GetInput(HWND a, UINT b, UINT_PTR c, DWORD d) {
     const auto &settings = Gamepad::Settings::get();
-    [[maybe_unused]] const auto commands = Gamepad::GetCommands(settings.GamepadId, settings);
+    const auto commands = Gamepad::GetCommands(settings);
 
-    Protocol().SendWriteRequest({reinterpret_cast<const char*>(&commands), sizeof(commands)}, 3);
+    Protocol().SendWriteRequest({reinterpret_cast<const char *>(&commands), sizeof(commands)}, 3);
 }
 
 void ControlSettingsWidget::DrawImpl() {

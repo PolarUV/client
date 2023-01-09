@@ -18,7 +18,7 @@ namespace Gamepad {
 
     void AddGamepadCallback(int gamepadId, int event);
 
-    Commands GetCommands(int gamepadId, const Gamepad::Settings& settings);
+    Commands GetCommands(const Gamepad::Settings &settings);
 
 } // Gamepad
 #endif  // CLIENT_GAMEPAD_HPP
